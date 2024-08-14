@@ -3,9 +3,9 @@ import { MiniProduct } from "@/types/MinimalProductType";
 
 const BestSellingSection = async () => {
   let req = await fetch(
-    `${process.env.SERVERHOST}/api/v1/products/by?query=bestseller&page=1&limit=16`,
+    `${process.env.SERVERHOST}/api/v1/products/by?query=bestseller&page=1&limit=12`,
     {
-      next: { revalidate: 1800 },
+      next: { revalidate: 600 },
     }
   );
   let res = await req.json();

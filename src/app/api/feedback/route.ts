@@ -39,6 +39,12 @@ export function GET(req: NextRequest) {
       feedback:
         "Fantastic selection of gifts for all occasions. The customer service team was very helpful in assisting me with my order. Highly satisfied!",
     },
+    {
+      name: "John Smith",
+      username: "johnsmitty",
+      feedback:
+        "Great variety of gifts and excellent customer service. My order arrived quickly and exceeded my expectations. Will definitely be shopping here again!",
+    },
   ];
 
   return NextResponse.json(feedbackData);
