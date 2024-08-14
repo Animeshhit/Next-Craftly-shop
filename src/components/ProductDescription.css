@@ -1,0 +1,11 @@
+.description_container strong {
+  @apply font-bold;
+}
+
+.description_container p {
+  @apply tracking-tight;
+}
+
+.description_container li {
+  @apply tracking-tighter my-3 list-disc;
+}

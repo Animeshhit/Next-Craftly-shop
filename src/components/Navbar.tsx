@@ -9,7 +9,7 @@ const Navbar = () => {
         <div className="bg-black py-1">
           <div className="container mx-auto">
             <div className="flex items-center justify-center">
-              <p className="text-xs md:text-sm text-white/75 text-center">
+              <p className="text-xs tracking-tight md:text-sm text-white/75 text-center">
                 Exclusive Deals: Up to 50% Off Select Gifts – Shop Now!
               </p>
             </div>
@@ -18,12 +18,14 @@ const Navbar = () => {
         <div className="py-1">
           <div className="container mx-auto">
             <div className="flex items-center justify-between">
-              <Link href="/" className="flex items-center justify-center gap-1">
-                <video className="w-12 h-12" autoPlay muted loop>
+              <Link href="/" className="flex items-center justify-center">
+                <video className="w-10 h-10" autoPlay muted loop>
                   <source src="/gift.webm"></source>
                 </video>
                 {/* <Image className="w-8 h-8" src={Gift} alt="logo" /> */}
-                <span className="font-semibold">Thecraftly.shop</span>
+                <span className="font-semibold text-sm tracking-tighter">
+                  Thecraftly.shop
+                </span>
               </Link>
               <div className="hidden md:block">
                 <SearchBarForNav />

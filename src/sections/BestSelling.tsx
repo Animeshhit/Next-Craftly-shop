@@ -1,13 +1,15 @@
 import ProductLoadingCard from "@/components/loading-components/ProductLoadingCard";
 import { Suspense, lazy } from "react";
-const Featured = () => {
-  const FeaturedSection = lazy(() => import("../components/FeaturedSection"));
+const BestSelling = () => {
+  const BestSellingSection = lazy(
+    () => import("../components/BestSellingSection")
+  );
   return (
-    <section id="featured">
+    <section id="bestselling">
       <h2 className="font-semibold text-2xl sm:text-3xl">
-        <span className="animate-pulse">Recently</span> <span>Added</span>
+        <span>Best</span> <span className="animate-pulse">Selling</span>
       </h2>
-      <p className="text-sm mt-1 text-gray-500">Packed with Love ❤️</p>
+      <p className="text-sm mt-1 text-gray-500">People Gave Love ❤️</p>
       <Suspense
         fallback={
           <>
@@ -19,10 +21,10 @@ const Featured = () => {
           </>
         }
       >
-        <FeaturedSection />
+        <BestSellingSection />
       </Suspense>
     </section>
   );
 };
 
-export default Featured;
+export default BestSelling;

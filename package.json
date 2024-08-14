@@ -9,13 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0",
     "@svgr/webpack": "^8.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "lucide-react": "^0.424.0",
     "next": "14.2.5",
     "nextjs-toploader": "^1.6.12",
     "react": "^18",
     "react-dom": "^18",
-    "swiper": "^11.1.9"
+    "swiper": "^11.1.9",
+    "tailwind-merge": "^2.5.2",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20",
