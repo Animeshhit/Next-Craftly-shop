@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MiniProduct } from "@/types/MinimalProductType";
 import { IndianRupee } from "lucide-react";
+import ImageLoader from "./ImageLoader";
 
 const Product = ({ Text, product }: { Text: string; product: MiniProduct }) => {
   return (
@@ -12,12 +13,11 @@ const Product = ({ Text, product }: { Text: string; product: MiniProduct }) => {
       <div
         className={`relative h-[300px] max-w-[300px] bg-gray-500 rounded-lg`}
       >
-        <Image
+        <ImageLoader
           width={300}
           height={300}
           src={product.productImage}
           className="w-full object-cover object-center h-full rounded-lg transition-all"
-          loading="lazy"
           alt={product.name}
         />
       </div>
