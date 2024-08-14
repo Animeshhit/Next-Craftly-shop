@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+
+// Define the type for your feedback entries (Optional, if using TypeScript)
+type Feedback = {
+  name: string;
+  username: string;
+  feedback: string;
+};
+
 export function GET(req: NextRequest) {
-  return NextResponse.json([
+  const feedbackData: Feedback[] = [
     {
       name: "Jane Doe",
       username: "janed123",
@@ -31,11 +39,7 @@ export function GET(req: NextRequest) {
       feedback:
         "Fantastic selection of gifts for all occasions. The customer service team was very helpful in assisting me with my order. Highly satisfied!",
     },
-    {
-      name: "John Smith",
-      username: "johnsmitty",
-      feedback:
-        "Great variety of gifts and excellent customer service. My order arrived quickly and exceeded my expectations. Will definitely be shopping here again!",
-    },
-  ]);
+  ];
+
+  return NextResponse.json(feedbackData);
 }
