@@ -31,8 +31,8 @@ const Navbar = () => {
               </div>
 
               <div className="flex items-center gap-4 md:gap-6 lg:gap-8">
-                <Link href="/" className="nav-link md:hidden">
-                  <Search className="links-icon" />
+                <Link href="/" className="md:hidden">
+                  <Search className="w-5 h-5" />
                 </Link>
                 {/* <Link href="/" className="nav-link">
                   <ShoppingCart className="links-icon" />

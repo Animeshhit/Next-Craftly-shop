@@ -3,7 +3,7 @@ import { MiniProduct } from "@/types/MinimalProductType";
 
 const FeaturedSection = async () => {
   let req = await fetch(
-    `${process.env.SERVERHOST}/api/v1/products/by?query=featured&page=1&limit=8`,
+    `${process.env.SERVERHOST}/api/v1/products/by?query=featured&page=1&limit=16`,
     {
       next: { revalidate: 1800 },
     }

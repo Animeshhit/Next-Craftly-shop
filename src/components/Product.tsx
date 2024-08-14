@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { MiniProduct } from "@/types/MinimalProductType";
 import { IndianRupee } from "lucide-react";
 import ImageLoader from "./ImageLoader";
@@ -10,9 +9,7 @@ const Product = ({ Text, product }: { Text: string; product: MiniProduct }) => {
       href={`/product/${Text}/${product._id}`}
       className="rounded-lg inline-block w-full"
     >
-      <div
-        className={`relative h-[300px] max-w-[300px] bg-gray-500 rounded-lg`}
-      >
+      <div className="relative h-[300px] max-w-[300px] rounded-lg">
         <ImageLoader
           width={300}
           height={300}

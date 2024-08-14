@@ -2,8 +2,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
 } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -29,7 +27,8 @@ export default async function ProductView({
   params: { Text: string; id: string };
 }) {
   let req = await fetch(
-    `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`
+    `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`,
+    { cache: "no-store" }
   );
 
   let { product } = await req.json();
@@ -41,7 +40,7 @@ export default async function ProductView({
             <Suspense
               fallback={
                 <>
-                  <div className="w-[600px] h-[600px] bg-zinc-600 rounded-lg animate-pulse"></div>
+                  <div className="w-full h-[400px] md:w-[600px] md:h-[600px] bg-zinc-600 rounded-lg animate-pulse"></div>
                 </>
               }
             >
@@ -74,8 +73,6 @@ export default async function ProductView({
                 })}
             </Suspense>
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
         </Carousel>
       </div>
       <div className="grid gap-4">
@@ -98,10 +95,21 @@ export default async function ProductView({
             Buy on WhatsApp
           </Button>
         </div>
-        <div className="grid gap-4">
-          <h2 className="text-2xl font-bold">Product Description</h2>
-          <div className="text-muted-foreground leading-relaxed">
-            <p>
+        <div className="grid gap-4 mt-5">
+          <Suspense
+            fallback={
+              <>
+                <div className="w-full h-8 bg-zinc-600 rounded-full animate-pulse"></div>
+                <div className="w-full h-6 mt-2 bg-zinc-600 rounded-full animate-pulse"></div>
+                <div className="w-full h-4 mt-2 bg-zinc-600 rounded-full animate-pulse"></div>
+              </>
+            }
+          >
+            <div
+              className="text-muted-foreground leading-relaxed dsc px-4"
+              dangerouslySetInnerHTML={{ __html: product.description }}
+            >
+              {/* <p>
               Elevate your winter wardrobe with our Cozy Knit Sweater. Crafted
               from a premium blend of soft, breathable materials, this sweater
               offers unparalleled comfort and style.
@@ -118,8 +126,9 @@ export default async function ProductView({
               occasion. Whether you&aposre running errands or enjoying a cozy
               night in, this sweater is sure to keep you warm and stylish all
               season long.
-            </p>
-          </div>
+            </p> */}
+            </div>
+          </Suspense>
         </div>
       </div>
     </div>

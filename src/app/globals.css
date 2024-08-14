@@ -69,14 +69,151 @@
 }
 
 @layer components {
-  .nav-links {
-    @apply flex items-center justify-center;
+  .dsc {
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
   }
-  .links-icon {
-    @apply text-zinc-500 hover:text-zinc-800;
-  }
-}
 
-.container {
-  @apply !px-4;
+  /* Headings */
+  .dsc h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+  }
+
+  .dsc h2 {
+    font-size: 1.75em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+  }
+
+  /* Paragraphs */
+  .dsc p {
+    margin: 1em 0;
+  }
+
+  /* Text Formatting */
+  .dsc b,
+  .dsc strong {
+    font-weight: bold;
+  }
+
+  .dsc i,
+  .dsc em {
+    font-style: italic;
+  }
+
+  .dsc u {
+    text-decoration: underline;
+  }
+
+  .dsc s {
+    text-decoration: line-through;
+  }
+
+  /* Blockquote */
+  .dsc blockquote {
+    margin: 1em 0;
+    padding: 10px 20px;
+    background-color: #eee;
+    border-left: 5px solid #ccc;
+  }
+
+  /* Lists */
+  .dsc ul,
+  .dsc ol {
+    margin: 1em 0;
+    padding-left: 20px;
+  }
+
+  .dsc li {
+    margin-bottom: 0.5em;
+  }
+
+  /* Links */
+  .dsc a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .dsc a:hover {
+    text-decoration: underline;
+  }
+
+  /* Images */
+  .dsc img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  /* Alignment */
+  .dsc .align-left {
+    text-align: left;
+  }
+
+  .dsc .align-center {
+    text-align: center;
+  }
+
+  .dsc .align-right {
+    text-align: right;
+  }
+
+  /* Quotation Marks */
+  .dsc q {
+    quotes: "“" "”" "‘" "’";
+  }
+
+  .dsc q:before {
+    content: open-quote;
+  }
+
+  .dsc q:after {
+    content: close-quote;
+  }
+
+  /* .dsc h1 {
+    @apply text-xl font-semibold mb-3;
+  }
+  .dsc h2 {
+    @apply text-lg font-semibold mb-2;
+  }
+  .dsc .ql-size-huge {
+    @apply font-bold text-4xl mb-6 block;
+  }
+  .dsc .ql-size-large {
+    @apply font-bold text-2xl mb-4 block;
+  }
+  .dsc .ql-size-small {
+    @apply font-bold text-xs mb-1 block;
+  }
+  /* .dsc * {
+    @apply mb-1;
+  } */
+  /* .dsc ul {
+    @apply my-1 list-disc;
+  }
+  .dsc li {
+    @apply text-sm mb-1 capitalize;
+  }
+  .dsc ol {
+    @apply list-decimal my-1;
+  }
+  .dsc blockquote {
+    @apply bg-gray-300 my-4 px-4 py-2 rounded-md text-black text-sm tracking-tight;
+  }
+
+  .dsc a {
+    @apply inline-block ml-2 py-2 px-4 text-sm capitalize bg-zinc-800 text-white rounded-md;
+  } */
+  .container {
+    @apply !px-4;
+  }
 }
