@@ -7,23 +7,32 @@ import {
 } from "@/components/ui/carousel";
 import { BannerType } from "@/types/BannerType";
 import ImageLoader from "./ImageLoader";
+import { cookies } from "next/headers";
 
 export default function SwiperBanner({
   banners,
 }: {
   banners: BannerType[] | [];
 }) {
+  const deviceType = cookies().get("device-type")?.value || "desktop";
   return (
     <section className="w-full mt-8">
       <Carousel className="w-full">
         <CarouselContent>
           {banners &&
             banners.map((banner: BannerType, index: number) => {
+              const imageUrl =
+                deviceType === "mobile"
+                  ? banner.phoneBannerImage // mobile image
+                  : deviceType === "tablet"
+                  ? banner.bannerImage // tablet image
+                  : banner.bannerImage; // desktop image
+
               return (
                 <CarouselItem key={index}>
                   <div className="relative h-[500px] w-full overflow-hidden">
                     <ImageLoader
-                      src={banner.bannerImage}
+                      src={imageUrl}
                       fill
                       alt={banner.bannerText}
                       className="aspect-[1920/500] object-cover w-full h-full rounded-md"
