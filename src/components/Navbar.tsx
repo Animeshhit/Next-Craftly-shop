@@ -1,7 +1,8 @@
 import { Search } from "lucide-react";
 import SearchBarForNav from "./client-components/SearchBarForNav";
 import Link from "next/link";
-const Navbar = () => {
+import Navigation from "./client-components/Navbar";
+const Navbar = async () => {
   return (
     <>
       <header className="backdrop-blur-lg border-b bg-white/75 sticky top-0 inset-x-0 z-10">
@@ -30,16 +31,12 @@ const Navbar = () => {
                 <SearchBarForNav />
               </div>
 
-              <div className="flex items-center gap-4 md:gap-6 lg:gap-8">
+              <div className="flex items-center gap-1">
                 <Link href="/" className="md:hidden">
                   <Search className="w-5 h-5" />
                 </Link>
-                {/* <Link href="/" className="nav-link">
-                  <ShoppingCart className="links-icon" />
-                </Link> */}
-                {/* <Link href="/" className="nav-link">
-                  <CircleUser className="links-icon" />
-                </Link> */}
+                <Navigation />
+               
               </div>
             </div>
           </div>

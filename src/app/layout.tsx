@@ -6,6 +6,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/sections/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +25,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <NextTopLoader />
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <Navbar />
         {children}
         <Footer />

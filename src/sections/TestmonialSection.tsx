@@ -2,7 +2,6 @@ import TestimonialsCard from "@/components/TestimonialsCard";
 
 const Testimonials = async () => {
   try {
-    // Use relative path if on the same domain
     let req = await fetch(`${process.env.HOST}/api/feedback`);
     if (!req.ok) {
       throw new Error(`Error fetching data: ${req.statusText}`);
