@@ -27,13 +27,11 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  const res = await fetch(
+  let req = await fetch(
     `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`,
-    {
-      cache: "no-store",
-    }
+    { cache: "no-store" }
   );
-  const { product } = await res.json();
+  const { product } = await req.json();
 
   return {
     title: `${product.name}`,
