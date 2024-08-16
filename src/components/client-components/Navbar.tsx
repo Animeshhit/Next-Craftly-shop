@@ -8,7 +8,6 @@ const Navigation = () => {
   const [user, setUser] = useState<null | any>(null);
   const getUserData = async () => {
     const userData = await getUser();
-    console.log(userData);
     setUser(userData);
   };
 

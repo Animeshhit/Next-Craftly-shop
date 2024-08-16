@@ -104,6 +104,12 @@ export default function Component() {
               "Sign In"
             )}
           </Button>
+          <p className="text-sm flex items-center gap-2 justify-center ">
+            Don't have an Account?{" "}
+            <Link href="/auth/register" className="text-zinc-900 font-semibold">
+              Register
+            </Link>
+          </p>
         </form>
       </div>
     </div>

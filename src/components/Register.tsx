@@ -9,6 +9,7 @@ import { userDataToBeRegistered } from "@/types/userDataType";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { LoaderCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function Register() {
   const { replace } = useRouter();
@@ -149,6 +150,12 @@ export default function Register() {
                 "Register"
               )}
             </Button>
+            <p className="text-sm flex items-center gap-2 justify-center mt-2">
+              Already have an account?{" "}
+              <Link href="/auth/login" className="text-zinc-900 font-semibold">
+                Login
+              </Link>
+            </p>
           </div>
         </form>
       </div>

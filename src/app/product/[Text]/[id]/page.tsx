@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import ImageLoader from "@/components/ImageLoader";
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { IndianRupee } from "lucide-react";
+import Link from "next/link";
 
 function calculateDiscountPercentage(
   originalPrice: number,
@@ -70,7 +72,7 @@ export default async function ProductView({
             <Suspense
               fallback={
                 <>
-                  <div className="w-full h-[400px] md:w-[600px] md:h-[600px] bg-zinc-600 rounded-lg animate-pulse"></div>
+                  <div className="w-full h-[350px] md:w-[500px] md:h-[500px] bg-zinc-600 rounded-lg animate-pulse"></div>
                 </>
               }
             >
@@ -109,9 +111,13 @@ export default async function ProductView({
         <div>
           <h1 className="text-3xl font-bold">{product.name}</h1>
           <div className="flex items-center gap-4 mt-2">
-            <p className="text-2xl font-bold">${product.discount}</p>
+            <p className="text-2xl font-bold">
+              <IndianRupee className="inline-block" />
+              {product.discount}
+            </p>
             <p className="text-sm text-muted-foreground line-through">
-              ${product.price}
+              <IndianRupee className="inline-block w-4 h-4" />
+              {product.price}
             </p>
             <Badge variant="outline" className="px-2 py-1">
               Save{" "}
@@ -120,10 +126,13 @@ export default async function ProductView({
           </div>
         </div>
         <div className="grid gap-2">
-          <Button className="flex items-center justify-center gap-2">
+          <Link
+            href={`/product/buyon/${params.id}/whatsapp`}
+            className="flex items-center justify-center bg-zinc-900 text-white py-2 tracking-tight rounded-md hover:bg-zinc-700 hover:text-white/75 transition gap-2"
+          >
             <PhoneIcon className="w-5 h-5" />
             Buy on WhatsApp
-          </Button>
+          </Link>
         </div>
         <div className="grid gap-4 mt-5">
           <Suspense
