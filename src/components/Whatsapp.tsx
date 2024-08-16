@@ -80,7 +80,7 @@ export default function WhatsApp({ data }: { data: any }) {
         <CardHeader>
           <CardTitle>Share Your Thoughts</CardTitle>
           <CardDescription>
-            Tell us what's on your mind and how we can help.
+            Tell us what&aposs on your mind and how we can help.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
