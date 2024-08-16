@@ -105,7 +105,7 @@ export default function Component() {
             )}
           </Button>
           <p className="text-sm flex items-center gap-2 justify-center ">
-            Don't have an Account?{" "}
+            Don&apost have an Account?{" "}
             <Link href="/auth/register" className="text-zinc-900 font-semibold">
               Register
             </Link>
