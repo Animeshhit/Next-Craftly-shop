@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 
 import ImageLoader from "@/components/ImageLoader";
 import { Suspense } from "react";
+import type { Metadata } from "next";
 
 function calculateDiscountPercentage(
   originalPrice: number,
@@ -19,6 +20,37 @@ function calculateDiscountPercentage(
   const discount = originalPrice - discountedPrice;
   const discountPercentage = (discount / originalPrice) * 100;
   return Math.floor(discountPercentage);
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const res = await fetch(
+    `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`,
+    {
+      cache: "no-store",
+    }
+  );
+  const { product } = await res.json();
+
+  return {
+    title: `${product.name}`,
+    description: product.description.slice(0, 160),
+    openGraph: {
+      title: product.name,
+      description: product.description.slice(0, 160),
+      images: [
+        {
+          url: product.productImage,
+          width: 800,
+          height: 600,
+          alt: product.name,
+        },
+      ],
+    },
+  };
 }
 
 export default async function ProductView({
