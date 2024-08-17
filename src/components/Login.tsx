@@ -8,7 +8,7 @@ import { userDataToBeLogin } from "@/types/userDataType";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { LoaderCircle } from "lucide-react";
+import { EyeIcon, LoaderCircle } from "lucide-react";
 
 export default function Component() {
   const { replace } = useRouter();
@@ -17,6 +17,8 @@ export default function Component() {
       phone: "",
       password: "",
     });
+  const [isPasswordVisiable, setIsPasswordIsVisiable] =
+    useState<boolean>(false);
   const [btn, setBtn] = useState(false);
   const handleChange = (e: any) => {
     setDataOfUserToBeLogin({
@@ -84,15 +86,27 @@ export default function Component() {
                 Forgot password?
               </Link>
             </div>
-            <Input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              required
-              name="password"
-              value={dataOfUserToBeLogin.password}
-              onChange={handleChange}
-            />
+            <div className="flex items-center">
+              <Input
+                id="password"
+                type={isPasswordVisiable ? "text" : "password"}
+                placeholder="Enter your password"
+                required
+                name="password"
+                value={dataOfUserToBeLogin.password}
+                onChange={handleChange}
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                className="!py-0 !px-1"
+                onClick={() => {
+                  setIsPasswordIsVisiable(!isPasswordVisiable);
+                }}
+              >
+                <EyeIcon className="h-5 w-5" />
+              </Button>
+            </div>
           </div>
           <Button disabled={btn} type="submit" className="w-full">
             {btn ? (
