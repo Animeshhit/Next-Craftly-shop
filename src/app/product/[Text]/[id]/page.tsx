@@ -4,7 +4,6 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 import ImageLoader from "@/components/ImageLoader";
 import { Suspense } from "react";
@@ -67,41 +66,41 @@ export default async function ProductView({
       <div className="grid gap-4">
         <Carousel className="rounded-lg overflow-hidden">
           <CarouselContent>
-            <Suspense
+            {/* <Suspense
               fallback={
                 <>
                   <div className="w-full h-[350px] md:w-[500px] md:h-[500px] bg-zinc-600 rounded-lg animate-pulse"></div>
                 </>
               }
-            >
-              {product && (
-                <CarouselItem>
-                  <ImageLoader
-                    alt="product Image Image"
-                    src={product.productImage}
-                    width={600}
-                    height={600}
-                    className="aspect-square object-cover w-full"
-                  />
-                </CarouselItem>
-              )}
-              {product &&
-                product.productImages.map((item: string, index: number) => {
-                  return (
-                    <>
-                      <CarouselItem key={index}>
-                        <ImageLoader
-                          alt="product Image"
-                          src={item}
-                          width={600}
-                          height={600}
-                          className="aspect-square object-cover w-full"
-                        />
-                      </CarouselItem>
-                    </>
-                  );
-                })}
-            </Suspense>
+            > */}
+            {product && (
+              <CarouselItem>
+                <ImageLoader
+                  alt="product Image Image"
+                  src={product.productImage}
+                  width={600}
+                  height={600}
+                  className="aspect-square object-cover w-full"
+                />
+              </CarouselItem>
+            )}
+            {product &&
+              product.productImages.map((item: string, index: number) => {
+                return (
+                  <>
+                    <CarouselItem key={index}>
+                      <ImageLoader
+                        alt="product Image"
+                        src={item}
+                        width={600}
+                        height={600}
+                        className="aspect-square object-cover w-full"
+                      />
+                    </CarouselItem>
+                  </>
+                );
+              })}
+            {/* </Suspense> */}
           </CarouselContent>
         </Carousel>
       </div>
