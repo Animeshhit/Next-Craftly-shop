@@ -30,8 +30,7 @@ export async function generateMetadata({
   params: { id: string };
 }): Promise<Metadata> {
   let req = await fetch(
-    `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`,
-    { cache: "no-store" }
+    `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`
   );
   const { product } = await req.json();
 
@@ -59,8 +58,7 @@ export default async function ProductView({
   params: { Text: string; id: string };
 }) {
   let req = await fetch(
-    `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`,
-    { cache: "no-store" }
+    `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`
   );
 
   let { product } = await req.json();
