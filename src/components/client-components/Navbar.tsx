@@ -1,19 +1,21 @@
 "use client";
 import Link from "next/link";
 import { ShoppingCart, CircleUser } from "lucide-react";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAuthState } from "@/helper/getUser";
 
-const Navigation = async ({
-  isAuth,
-  user,
-}: {
-  isAuth: boolean | null;
-  user: any;
-}) => {
+const Navigation = () => {
+  const { isAuth, user } = useSelector((s: any) => s.auth);
+
+  useEffect(() => {
+    getAuthState();
+  }, []);
   return (
     <>
       {isAuth == null ? (
         <p>Loading...</p>
-      ) : user ? (
+      ) : isAuth ? (
         <>
           <div className="flex gap-2">
             <Link href="/" className="p-1">

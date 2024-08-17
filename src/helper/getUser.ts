@@ -1,28 +1,39 @@
 import store from "@/lib/store/store";
 import { getUser } from "@/lib/store/slices/authSlice";
-export const getAuthState = async () => {
-  let authState = store.getState().auth;
-  if (authState.isAuth) {
-    return authState;
-  } else {
-    const getUserFromServer = async () => {
-      const req = await fetch(`${process.env.HOST}/api/auth/login`, {
-        method: "GET",
-        credentials: "include", // Important to include cookies
-      });
-      const data = await req.json();
-      if (req.status == 200) {
-        return data.user;
-      }
 
-      return false;
-    };
-    let user = await getUserFromServer();
-    if (user) {
-      store.dispatch(getUser({ isAuth: true, user }));
-    } else {
-      store.dispatch(getUser({ isAuth: false, user: null }));
-    }
+export const getAuthState = async () => {
+  const authState = store.getState().auth;
+
+  if (authState.isAuth !== null) {
     return authState;
+  }
+
+  try {
+    const response = await fetch(`${process.env.HOST}/api/auth/login`, {
+      method: "GET",
+      credentials: "include", // Important to include cookies
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch user data: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const state = {
+      isAuth: true,
+      user: data.user,
+    };
+
+    store.dispatch(getUser(state));
+    return state;
+  } catch (error) {
+    console.error("Error fetching auth state:", error);
+    const state = {
+      isAuth: false,
+      user: null,
+    };
+
+    store.dispatch(getUser(state));
+    return state;
   }
 };

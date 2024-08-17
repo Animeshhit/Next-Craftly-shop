@@ -2,9 +2,7 @@ import { Search } from "lucide-react";
 import SearchBarForNav from "./client-components/SearchBarForNav";
 import Link from "next/link";
 import Navigation from "./client-components/Navbar";
-import { getAuthState } from "@/helper/getUser";
 const Navbar = async () => {
-  const { isAuth, user } = await getAuthState();
   return (
     <>
       <header className="backdrop-blur-lg border-b bg-white/75 sticky top-0 inset-x-0 z-10">
@@ -37,7 +35,7 @@ const Navbar = async () => {
                 <Link href="/" className="md:hidden">
                   <Search className="w-5 h-5" />
                 </Link>
-                <Navigation isAuth={isAuth} user={user} />
+                <Navigation />
               </div>
             </div>
           </div>

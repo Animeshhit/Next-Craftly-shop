@@ -147,7 +147,7 @@ export default function Register() {
             </div>
           </div>
           <div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" disabled={btn} className="w-full">
               {btn ? (
                 <span className="flex items-center gap-2">
                   <LoaderCircle className="w-5 h-5 animate-spin" />
