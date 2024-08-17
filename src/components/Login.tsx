@@ -10,7 +10,15 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { EyeIcon, LoaderCircle } from "lucide-react";
 
+//redux
+import { login } from "@/lib/store/slices/authSlice";
+import { useDispatch } from "react-redux";
+
 export default function Component() {
+  //redux
+
+  const dispatch = useDispatch();
+
   const { replace } = useRouter();
   const [dataOfUserToBeLogin, setDataOfUserToBeLogin] =
     useState<userDataToBeLogin>({
@@ -41,6 +49,7 @@ export default function Component() {
       const res = await req.json();
       if (req.status == 200) {
         toast.success(res.message);
+        dispatch(login(res.user));
         replace("/");
       } else {
         setBtn(false);

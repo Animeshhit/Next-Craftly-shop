@@ -10,8 +10,14 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
+//redux
+import { useDispatch } from "react-redux";
+import { register } from "@/lib/store/slices/authSlice";
 
 export default function Register() {
+  //redux
+  const dispatch = useDispatch();
+
   const { replace } = useRouter();
   const [dataOfUserToBeRegistered, setDataOfUserToBeRegistered] =
     useState<userDataToBeRegistered>({
@@ -46,6 +52,7 @@ export default function Register() {
       });
       let res = await req.json();
       if (req.status == 201) {
+        dispatch(register(res.user));
         toast.success(res.message);
         replace("/");
       } else {

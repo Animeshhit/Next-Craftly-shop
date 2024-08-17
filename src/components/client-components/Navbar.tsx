@@ -1,22 +1,17 @@
 "use client";
-import { getUser } from "@/helper/getUser";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ShoppingCart, CircleUser } from "lucide-react";
 
-const Navigation = () => {
-  const [user, setUser] = useState<null | any>(null);
-  const getUserData = async () => {
-    const userData = await getUser();
-    setUser(userData);
-  };
-
-  useEffect(() => {
-    getUserData();
-  }, []);
+const Navigation = async ({
+  isAuth,
+  user,
+}: {
+  isAuth: boolean | null;
+  user: any;
+}) => {
   return (
     <>
-      {user == null ? (
+      {isAuth == null ? (
         <p>Loading...</p>
       ) : user ? (
         <>

@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { decode } from "punycode";
+import dbConnect from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,6 +18,7 @@ export async function POST(req: NextRequest) {
         { status: 401 }
       );
     }
+    dbConnect();
     const { phone, password } = refinedData.data;
     const user = await userModel.findOne({ phone });
     if (!user) {
@@ -70,6 +72,8 @@ export async function GET() {
     if (!decoded || !decoded.id) {
       return NextResponse.json({ message: "unauthorized" }, { status: 403 });
     }
+
+    dbConnect();
 
     const user = await userModel.findOne({ _id: decoded.id });
     if (!user) {
