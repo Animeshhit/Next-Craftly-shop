@@ -5,7 +5,6 @@ import Navigation from "./client-components/Navbar";
 import { getAuthState } from "@/helper/getUser";
 const Navbar = async () => {
   const { isAuth, user } = await getAuthState();
-  console.log(isAuth, user);
   return (
     <>
       <header className="backdrop-blur-lg border-b bg-white/75 sticky top-0 inset-x-0 z-10">
