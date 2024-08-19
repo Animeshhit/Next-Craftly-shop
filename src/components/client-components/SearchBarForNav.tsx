@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 import { Search } from "lucide-react";
 import { MiniProduct } from "@/types/MinimalProductType";
 import Link from "next/link";
@@ -12,6 +18,7 @@ const SearchBarForNav = () => {
   const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const searchRef = useRef<HTMLFormElement | null>(null);
 
   const getSearchResults = useCallback(
     async (controller: AbortController) => {
@@ -60,6 +67,23 @@ const SearchBarForNav = () => {
     setSearchRes(null);
   }, [pathname]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setSearchText(""); // Clear search text
+        setSearchRes(null); // Clear search results
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchText.trim().length > 0) {
@@ -71,6 +95,7 @@ const SearchBarForNav = () => {
     <form
       onSubmit={handleSubmit}
       className="w-[350px] relative lg:w-[450px] flex px-4 items-center border border-zinc-400 rounded-full gap-2"
+      ref={searchRef}
     >
       <Search className="w-4 text-zinc-500" />
       <input
@@ -93,8 +118,9 @@ const SearchBarForNav = () => {
               <Link
                 href={`/product/Search Results/${item._id}`}
                 key={index}
-                className="text-sm hover:bg-zinc-200 rounded-md cursor-pointer py-1 px-2"
+                className="text-sm flex items-center gap-2 hover:bg-zinc-200 rounded-md cursor-pointer py-1 px-2"
               >
+                <Search className="w-3 h-3" />
                 {item.name}
               </Link>
             ))

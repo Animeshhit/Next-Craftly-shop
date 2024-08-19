@@ -10,7 +10,7 @@ const page = ({ params }: { params: { Text: string } }) => {
         <div className="container mx-auto px-4">
           <div className="flex gap-8">
             <div className="w-[350px] border-r-2 h-auto py-6 px-4">
-              <SearchNavbar />
+              <SearchNavbar query={params.Text} />
             </div>
             <div className="flex-1 mt-4">
               <Suspense

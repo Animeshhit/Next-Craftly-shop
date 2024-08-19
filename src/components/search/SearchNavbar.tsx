@@ -5,14 +5,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Suspense } from "react";
+import { ReactNode, Suspense } from "react";
 
-const SearchNavbar = async () => {
-  let req = await fetch(`${process.env.SERVERHOST}/api/v1/categories`);
+const SearchNavbar = async ({ query }: { query: string }) => {
+  let req = await fetch(` ${process.env.SERVERHOST}/api/v1/search?q=${query}`);
   if (!req.ok) {
     throw new Error("Failed To Load");
   }
-  let ctgs = await req.json();
+  let { products } = await req.json();
   return (
     <>
       <Accordion type="single" collapsible>
@@ -20,19 +20,25 @@ const SearchNavbar = async () => {
           <AccordionTrigger>Category</AccordionTrigger>
           <Suspense fallback={<p>Loading...</p>}>
             <AccordionContent className="px-3">
-              {ctgs &&
-                ctgs.map((item: { name: string }, index: number) => {
+              {products &&
+                Array.from(
+                  new Set(
+                    products.map(
+                      (item: { catagories: string }) => item.catagories
+                    )
+                  )
+                ).map((category, index) => {
                   return (
                     <div
                       key={index}
                       className="flex items-center mb-4 space-x-2"
                     >
-                      <Checkbox id={item.name} />
+                      <Checkbox id={category as string} />
                       <label
-                        htmlFor={item.name}
+                        htmlFor={category as string}
                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       >
-                        {item.name}
+                        <p>{category as string}</p>
                       </label>
                     </div>
                   );
