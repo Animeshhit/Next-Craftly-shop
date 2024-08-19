@@ -18,7 +18,10 @@ const page = ({ params }: { params: { Text: string } }) => {
                   <>
                     {Array.from({ length: 8 }).map((_, index: number) => {
                       return (
-                        <div className="flex items-center w-full gap-4 py-3 px-4 max-w-[350px]">
+                        <div
+                          key={index}
+                          className="flex items-center w-full gap-4 py-3 px-4 max-w-[350px]"
+                        >
                           <Skeleton className="w-[100px] bg-zinc-500 h-[100px]" />
                           <div className="w-full">
                             <Skeleton className="w-full h-4 bg-zinc-500 mb-2 rounded-full" />

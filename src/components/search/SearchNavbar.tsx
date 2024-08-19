@@ -49,7 +49,7 @@ const SearchNavbar = async () => {
             {Array.from({ length: 8 }).map((_, index: number) => {
               if (index < 1) {
                 return (
-                  <div className="flex items-center mb-4 space-x-2">
+                  <div key={index} className="flex items-center mb-4 space-x-2">
                     <Checkbox id={`${index}`} />
                     <label
                       htmlFor={`${index}`}
@@ -61,7 +61,7 @@ const SearchNavbar = async () => {
                 );
               } else {
                 return (
-                  <div className="flex items-center mb-4 space-x-2">
+                  <div key={index} className="flex items-center mb-4 space-x-2">
                     <Checkbox id={`${index}`} />
                     <label
                       htmlFor={`${index}`}
