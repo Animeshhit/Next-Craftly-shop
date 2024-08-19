@@ -23,7 +23,10 @@ const SearchNavbar = async () => {
               {ctgs &&
                 ctgs.map((item: { name: string }, index: number) => {
                   return (
-                    <div className="flex items-center mb-4 space-x-2">
+                    <div
+                      key={index}
+                      className="flex items-center mb-4 space-x-2"
+                    >
                       <Checkbox id={item.name} />
                       <label
                         htmlFor={item.name}
