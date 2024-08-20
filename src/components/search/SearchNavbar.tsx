@@ -5,14 +5,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ReactNode, Suspense } from "react";
+import { MiniProduct } from "@/types/MinimalProductType";
+import { Suspense } from "react";
 
-const SearchNavbar = async ({ query }: { query: string }) => {
-  let req = await fetch(` ${process.env.SERVERHOST}/api/v1/search?q=${query}`);
-  if (!req.ok) {
-    throw new Error("Failed To Load");
-  }
-  let { products } = await req.json();
+const SearchNavbar = async ({ products }: { products: MiniProduct[] | [] }) => {
   return (
     <>
       <Accordion type="single" collapsible>

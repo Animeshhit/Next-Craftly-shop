@@ -3,14 +3,21 @@ import { SearchResults } from "@/components/search/SearchResults";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const page = ({ params }: { params: { Text: string } }) => {
+const page = async ({ params }: { params: { Text: string } }) => {
+  let req = await fetch(
+    ` ${process.env.SERVERHOST}/api/v1/search?q=${params.Text}`
+  );
+  if (!req.ok) {
+    throw new Error("Failed To Load");
+  }
+  let { products } = await req.json();
   return (
     <>
       <section>
         <div className="container mx-auto px-4">
           <div className="flex gap-8">
             <div className="w-[350px] border-r-2 h-auto py-6 px-4">
-              <SearchNavbar query={params.Text} />
+              <SearchNavbar products={products} />
             </div>
             <div className="flex-1 mt-4">
               <Suspense
@@ -34,7 +41,7 @@ const page = ({ params }: { params: { Text: string } }) => {
                   </>
                 }
               >
-                <SearchResults query={params.Text} />
+                <SearchResults products={products} />
               </Suspense>
             </div>
           </div>
