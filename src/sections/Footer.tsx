@@ -36,11 +36,11 @@ const footerLinks = [
       },
       {
         text: "login",
-        src: "/login",
+        src: "/auth/login",
       },
       {
         text: "Join us",
-        src: "/join now",
+        src: "/auth/register",
       },
     ],
   },

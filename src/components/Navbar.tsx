@@ -2,6 +2,7 @@ import { Search } from "lucide-react";
 import SearchBarForNav from "./client-components/SearchBarForNav";
 import Link from "next/link";
 import Navigation from "./client-components/Navbar";
+import Image from "next/image";
 const Navbar = async () => {
   return (
     <>
@@ -23,8 +24,8 @@ const Navbar = async () => {
                   <source src="/gift.webm"></source>
                 </video>
                 {/* <Image className="w-8 h-8" src={Gift} alt="logo" /> */}
-                <span className="font-semibold tracking-tighter">
-                  Thecraftly.shop
+                <span className="font-semibold text-xs tracking-tighter">
+                  THE CRAFTLY SHOP
                 </span>
               </Link>
               <div className="hidden md:block">
