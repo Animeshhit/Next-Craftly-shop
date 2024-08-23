@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { getAuthState } from "@/helper/getUser";
 
 const Navigation = () => {
-  const { isAuth, user } = useSelector((s: any) => s.auth);
+  const { isAuth } = useSelector((s: any) => s.auth);
 
   useEffect(() => {
     getAuthState();

@@ -11,6 +11,10 @@ export default async function Page({ params }: { params: { id: string } }) {
     { cache: "no-store" }
   );
 
+  if (!req.ok) {
+    return <h2>Something went Wrong!!</h2>;
+  }
+
   let { product } = await req.json();
   return <WhatsApp data={product} />;
 }

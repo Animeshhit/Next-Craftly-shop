@@ -23,15 +23,27 @@ function calculateDiscountPercentage(
   return Math.floor(discountPercentage);
 }
 
+async function fetchProductData(id: string) {
+  const req = await fetch(`${process.env.SERVERHOST}/api/v1/product?id=${id}`);
+  if (!req.ok) {
+    return null;
+  }
+  const { product } = await req.json();
+  return product;
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  let req = await fetch(
-    `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`
-  );
-  const { product } = await req.json();
+  const product = await fetchProductData(params.id);
+
+  if (!product) {
+    return {
+      title: "Product Not Found",
+    };
+  }
 
   return {
     title: `${product.name}`,
@@ -54,29 +66,23 @@ export async function generateMetadata({
 export default async function ProductView({
   params,
 }: {
-  params: { Text: string; id: string };
+  params: { id: string };
 }) {
-  let req = await fetch(
-    `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`
-  );
+  const product = await fetchProductData(params.id);
 
-  let { product } = await req.json();
+  if (!product) {
+    return <h2>Product Not Found</h2>;
+  }
+
   return (
     <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-12 px-4 md:px-6">
       <div className="grid gap-4">
         <Carousel className="rounded-lg overflow-hidden">
           <CarouselContent>
-            {/* <Suspense
-              fallback={
-                <>
-                  <div className="w-full h-[350px] md:w-[500px] md:h-[500px] bg-zinc-600 rounded-lg animate-pulse"></div>
-                </>
-              }
-            > */}
             {product && (
               <CarouselItem>
                 <ImageLoader
-                  alt="product Image Image"
+                  alt="product Image"
                   src={product.productImage}
                   width={600}
                   height={600}
@@ -84,23 +90,17 @@ export default async function ProductView({
                 />
               </CarouselItem>
             )}
-            {product &&
-              product.productImages.map((item: string, index: number) => {
-                return (
-                  <>
-                    <CarouselItem key={index}>
-                      <ImageLoader
-                        alt="product Image"
-                        src={item}
-                        width={600}
-                        height={600}
-                        className="aspect-square object-cover w-full"
-                      />
-                    </CarouselItem>
-                  </>
-                );
-              })}
-            {/* </Suspense> */}
+            {product.productImages.map((item: string, index: number) => (
+              <CarouselItem key={index}>
+                <ImageLoader
+                  alt="product Image"
+                  src={item}
+                  width={600}
+                  height={600}
+                  className="aspect-square object-cover w-full"
+                />
+              </CarouselItem>
+            ))}
           </CarouselContent>
         </Carousel>
       </div>
@@ -144,26 +144,7 @@ export default async function ProductView({
             <div
               className="text-muted-foreground leading-relaxed dsc px-4"
               dangerouslySetInnerHTML={{ __html: product.description }}
-            >
-              {/* <p>
-              Elevate your winter wardrobe with our Cozy Knit Sweater. Crafted
-              from a premium blend of soft, breathable materials, this sweater
-              offers unparalleled comfort and style.
-            </p>
-            <p className="mt-4">
-              Featuring a classic crew neckline and a relaxed, oversized fit,
-              this sweater is perfect for layering or wearing on its own. The
-              intricate knit pattern adds a touch of elegance, while the ribbed
-              cuffs and hem provide a flattering, tailored look.
-            </p>
-            <p className="mt-4">
-              Available in a range of timeless colors, the Cozy Knit Sweater is
-              a versatile piece that can be dressed up or down to suit any
-              occasion. Whether you&aposre running errands or enjoying a cozy
-              night in, this sweater is sure to keep you warm and stylish all
-              season long.
-            </p> */}
-            </div>
+            ></div>
           </Suspense>
         </div>
       </div>

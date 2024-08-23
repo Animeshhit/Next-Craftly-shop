@@ -8,6 +8,9 @@ const FeaturedSection = async () => {
       next: { revalidate: 600 },
     }
   );
+  if (!req.ok) {
+    return <h2>Something Went Wrong Please Try again later after sometime</h2>;
+  }
   let res = await req.json();
   return (
     <>

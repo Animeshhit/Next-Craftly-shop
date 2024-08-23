@@ -2,7 +2,6 @@ import { Search } from "lucide-react";
 import SearchBarForNav from "./client-components/SearchBarForNav";
 import Link from "next/link";
 import Navigation from "./client-components/Navbar";
-import Image from "next/image";
 const Navbar = async () => {
   return (
     <>

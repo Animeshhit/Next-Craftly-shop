@@ -8,7 +8,7 @@ const page = async ({ params }: { params: { Text: string } }) => {
     ` ${process.env.SERVERHOST}/api/v1/search?q=${params.Text}`
   );
   if (!req.ok) {
-    throw new Error("Failed To Load");
+    return <h2>Something Went Wrong Please Try Again Later</h2>;
   }
   let { products } = await req.json();
   return (
