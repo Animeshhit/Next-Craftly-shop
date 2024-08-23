@@ -3,7 +3,7 @@ import SwiperBanner from "@/components/SwiperBanner";
 
 const Banners = async () => {
   let req = await fetch(`${process.env.SERVERHOST}/api/v1/banners`, {
-    next: { revalidate: 600 },
+    next: { revalidate: 300 },
   });
   if (!req.ok) {
     return (

@@ -5,7 +5,7 @@ const BestSellingSection = async () => {
   let req = await fetch(
     `${process.env.SERVERHOST}/api/v1/products/by?query=bestseller&page=1&limit=12`,
     {
-      next: { revalidate: 600 },
+      next: { revalidate: 120 },
     }
   );
   if (!req.ok) {
