@@ -12,14 +12,21 @@ const FeaturedSection = async () => {
     return <h2>Something Went Wrong Please Try again later after sometime</h2>;
   }
   let res = await req.json();
+  console.log(res);
   return (
     <>
       <div className="my-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 justify-self-center place-content-center place-items-center">
         {/* <h2>hello world</h2> */}
         {res.products &&
-          res.products.map((item: MiniProduct, index: number) => (
-            <Product key={index} Text="Newly Added" product={item} />
-          ))}
+          res.products.map((item: MiniProduct, index: number) => {
+            if (!item.isDraft) {
+              if (item.isAvailable) {
+                return (
+                  <Product key={index} Text="Newly Added" product={item} />
+                );
+              }
+            }
+          })}
       </div>
     </>
   );

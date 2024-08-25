@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import ImageLoader from "@/components/ImageLoader";
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { IndianRupee } from "lucide-react";
+import { IndianRupee, Package } from "lucide-react";
 import Link from "next/link";
 
 function calculateDiscountPercentage(
@@ -123,13 +123,25 @@ export default async function ProductView({
           </div>
         </div>
         <div className="grid gap-2">
-          <Link
-            href={`/product/buyon/${params.id}/whatsapp`}
-            className="flex items-center justify-center bg-zinc-900 text-white py-2 tracking-tight rounded-md hover:bg-zinc-700 hover:text-white/75 transition gap-2"
-          >
-            <PhoneIcon className="w-5 h-5" />
-            Buy on WhatsApp
-          </Link>
+          {product.isDraft ? (
+            <div className="py-2 w-full px-4 bg-red-600 text-white justify-center rounded-md flex items-center gap-2">
+              <Package className="w-4 h-4" />
+              <span>Product Out Of Stock</span>
+            </div>
+          ) : product.isAvailable ? (
+            <Link
+              href={`/product/buyon/${params.id}/whatsapp`}
+              className="flex items-center justify-center bg-zinc-900 text-white py-2 tracking-tight rounded-md hover:bg-zinc-700 hover:text-white/75 transition gap-2"
+            >
+              <PhoneIcon className="w-5 h-5" />
+              Buy on WhatsApp
+            </Link>
+          ) : (
+            <div className="py-2 w-full px-4 bg-yellow-600 text-white justify-center rounded-md flex items-center gap-2">
+              <Package className="w-4 h-4" />
+              <span>Currently Unavailable</span>
+            </div>
+          )}
         </div>
         <div className="grid gap-4 mt-5">
           <Suspense
