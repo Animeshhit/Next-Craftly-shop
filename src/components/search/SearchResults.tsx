@@ -10,15 +10,21 @@ export const SearchResults = async ({
   return (
     <div>
       {products && products.length > 0 ? (
-        products.map((item: MiniProduct, index: number) => (
-          <SearchProduct
-            productImage={item.productImage}
-            name={item.name}
-            discount={item.discount}
-            key={index}
-            id={item._id}
-          />
-        ))
+        products.map((item: MiniProduct, index: number) => {
+          if (!item.isDraft) {
+            if (item.isAvailable) {
+              return (
+                <SearchProduct
+                  productImage={item.productImage}
+                  name={item.name}
+                  discount={item.discount}
+                  key={index}
+                  id={item._id}
+                />
+              );
+            }
+          }
+        })
       ) : (
         <>
           <div className="w-full h-[500px] flex items-center justify-center flex-col">
