@@ -24,7 +24,9 @@ function calculateDiscountPercentage(
 }
 
 async function fetchProductData(id: string) {
-  const req = await fetch(`${process.env.SERVERHOST}/api/v1/product?id=${id}`);
+  const req = await fetch(`${process.env.SERVERHOST}/api/v1/product?id=${id}`, {
+    cache: "no-store",
+  });
   if (!req.ok) {
     return null;
   }

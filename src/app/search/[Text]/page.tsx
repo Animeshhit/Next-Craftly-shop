@@ -5,7 +5,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const page = async ({ params }: { params: { Text: string } }) => {
   let req = await fetch(
-    ` ${process.env.SERVERHOST}/api/v1/search?q=${params.Text}`
+    ` ${process.env.SERVERHOST}/api/v1/search?q=${params.Text}`,
+    {
+      cache: "no-store",
+    }
   );
   if (!req.ok) {
     return <h2>Something Went Wrong Please Try Again Later</h2>;
