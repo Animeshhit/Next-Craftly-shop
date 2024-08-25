@@ -12,7 +12,6 @@ const FeaturedSection = async () => {
     return <h2>Something Went Wrong Please Try again later after sometime</h2>;
   }
   let res = await req.json();
-  console.log(res);
   return (
     <>
       <div className="my-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 justify-self-center place-content-center place-items-center">

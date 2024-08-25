@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import WhatsApp from "@/components/Whatsapp";
-import { useRouter } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Buy on Whatsapp",
 };
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const { replace } = useRouter();
   let req = await fetch(
     `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`,
     { cache: "no-store" }
@@ -22,9 +20,9 @@ export default async function Page({ params }: { params: { id: string } }) {
     if (product.isAvailable) {
       return <WhatsApp data={product} />;
     } else {
-      replace("/");
+      return <h2>Product Not Found</h2>;
     }
   } else {
-    replace("/");
+    return <h2>Product Not Found</h2>;
   }
 }
