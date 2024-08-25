@@ -91,6 +91,34 @@ const SearchBarForNav = () => {
     }
   };
 
+  // Memoize search results to avoid unnecessary re-renders
+  const memoizedSearchResults = useMemo(() => {
+    if (isLoading) {
+      return (
+        <p className="text-sm rounded-md cursor-pointer py-1 px-2">
+          Loading...
+        </p>
+      );
+    } else if (searchRes && searchRes.length > 0) {
+      return searchRes.map((item: MiniProduct, index: number) => (
+        <Link
+          href={`/product/Search Results/${item._id}`}
+          key={index}
+          className="text-sm flex items-center gap-2 hover:bg-zinc-200 rounded-md cursor-pointer py-1 px-2"
+        >
+          <Search className="w-3 h-3" />
+          {item.name}
+        </Link>
+      ));
+    } else {
+      return (
+        <p className="text-sm rounded-md cursor-pointer py-1 px-2">
+          No search results
+        </p>
+      );
+    }
+  }, [searchRes, isLoading]);
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -109,26 +137,7 @@ const SearchBarForNav = () => {
       />
       {searchText.length > 0 && (
         <div className="absolute bg-white flex flex-col gap-1 top-12 py-3 px-2 rounded-md shadow-lg inset-x-0">
-          {isLoading ? (
-            <p className="text-sm rounded-md cursor-pointer py-1 px-2">
-              Loading...
-            </p>
-          ) : searchRes && searchRes.length > 0 ? (
-            searchRes.map((item: MiniProduct, index: number) => (
-              <Link
-                href={`/product/Search Results/${item._id}`}
-                key={index}
-                className="text-sm flex items-center gap-2 hover:bg-zinc-200 rounded-md cursor-pointer py-1 px-2"
-              >
-                <Search className="w-3 h-3" />
-                {item.name}
-              </Link>
-            ))
-          ) : (
-            <p className="text-sm rounded-md cursor-pointer py-1 px-2">
-              No search results
-            </p>
-          )}
+          {memoizedSearchResults}
         </div>
       )}
     </form>
