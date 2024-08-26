@@ -4,12 +4,13 @@ import { getUser } from "@/lib/store/slices/authSlice";
 export const getAuthState = async () => {
   const authState = store.getState().auth;
 
+
   if (authState.isAuth !== null) {
     return authState;
   }
 
   try {
-    const response = await fetch(`${process.env.HOST}/api/auth/login`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/auth/login`, {
       method: "GET",
       credentials: "include", // Important to include cookies
     });

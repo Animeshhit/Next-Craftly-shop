@@ -39,7 +39,7 @@ export default function Component() {
     e.preventDefault();
     try {
       setBtn(true);
-      const req = await fetch("/api/auth/login", {
+      const req = await fetch(`/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
