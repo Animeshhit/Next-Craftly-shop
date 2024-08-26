@@ -3,13 +3,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 // Dynamically import SearchNavbar and SearchResults
 const SearchNavbar = dynamic(() => import("@/components/search/SearchNavbar"), {
-  suspense: true,
   loading: () => <p>Loading...</p>,
 });
 const SearchResults = dynamic(
   () => import("@/components/search/SearchResults"),
   {
-    suspense: true,
     loading: () => <ProductSkeletons count={8} />,
   }
 );
