@@ -4,34 +4,33 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
-
 import ImageLoader from "@/components/ImageLoader";
 import { Suspense } from "react";
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { IndianRupee, Package } from "lucide-react";
 import Link from "next/link";
-
-function calculateDiscountPercentage(
-  originalPrice: number,
-  discountedPrice: number
-) {
-  if (originalPrice <= 0) {
-    throw new Error("Original price must be greater than zero.");
-  }
-  const discount = originalPrice - discountedPrice;
-  const discountPercentage = (discount / originalPrice) * 100;
-  return Math.floor(discountPercentage);
-}
+import ProductLoader from "@/components/loading-components/ProductLoading";
 
 async function fetchProductData(id: string) {
-  const req = await fetch(`${process.env.SERVERHOST}/api/v1/product?id=${id}`, {
-    cache: "no-store",
-  });
-  if (!req.ok) {
+  try {
+    const response = await fetch(
+      `${process.env.SERVERHOST}/api/v1/product?id=${id}`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch product data: ${response.statusText}`);
+    }
+
+    const { product } = await response.json();
+
+    return product;
+  } catch (error) {
+    console.error("Error fetching product data:", error);
     return null;
   }
-  const { product } = await req.json();
-  return product;
 }
 
 export async function generateMetadata({
@@ -77,11 +76,19 @@ export default async function ProductView({
   }
 
   return (
-    <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-12 px-4 md:px-6">
-      <div className="grid gap-4">
-        <Carousel className="rounded-lg overflow-hidden">
-          <CarouselContent>
-            {product && (
+    <Suspense
+      fallback={
+        <>
+          <div className="my-6">
+            <ProductLoader />
+          </div>
+        </>
+      }
+    >
+      <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-12 px-4 md:px-6">
+        <div className="grid gap-4">
+          <Carousel className="rounded-lg overflow-hidden">
+            <CarouselContent>
               <CarouselItem>
                 <ImageLoader
                   alt="product Image"
@@ -91,79 +98,91 @@ export default async function ProductView({
                   className="aspect-square object-cover w-full"
                 />
               </CarouselItem>
+              {product.productImages.map((item: string, index: number) => (
+                <CarouselItem key={index}>
+                  <ImageLoader
+                    alt="product Image"
+                    src={item}
+                    width={600}
+                    height={600}
+                    className="aspect-square object-cover w-full"
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
+        <div className="grid gap-4">
+          <div>
+            <h1 className="text-3xl font-bold">{product.name}</h1>
+            <div className="flex items-center gap-4 mt-2">
+              <p className="text-2xl font-bold">
+                <IndianRupee className="inline-block" />
+                {product.discount}
+              </p>
+              <p className="text-sm text-muted-foreground line-through">
+                <IndianRupee className="inline-block w-4 h-4" />
+                {product.price}
+              </p>
+              <Badge variant="outline" className="px-2 py-1">
+                Save{" "}
+                {calculateDiscountPercentage(product.price, product.discount)}%
+              </Badge>
+            </div>
+          </div>
+          <div className="grid gap-2">
+            {product.isDraft ? (
+              <div className="py-2 w-full px-4 bg-red-600 text-white justify-center rounded-md flex items-center gap-2">
+                <Package className="w-4 h-4" />
+                <span>Product Out Of Stock</span>
+              </div>
+            ) : product.isAvailable ? (
+              <Link
+                href={`/product/buyon/${params.id}/whatsapp`}
+                className="flex items-center justify-center bg-zinc-900 text-white py-2 tracking-tight rounded-md hover:bg-zinc-700 hover:text-white/75 transition gap-2"
+              >
+                <PhoneIcon className="w-5 h-5" />
+                Buy on WhatsApp
+              </Link>
+            ) : (
+              <div className="py-2 w-full px-4 bg-yellow-600 text-white justify-center rounded-md flex items-center gap-2">
+                <Package className="w-4 h-4" />
+                <span>Currently Unavailable</span>
+              </div>
             )}
-            {product.productImages.map((item: string, index: number) => (
-              <CarouselItem key={index}>
-                <ImageLoader
-                  alt="product Image"
-                  src={item}
-                  width={600}
-                  height={600}
-                  className="aspect-square object-cover w-full"
-                />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-      </div>
-      <div className="grid gap-4">
-        <div>
-          <h1 className="text-3xl font-bold">{product.name}</h1>
-          <div className="flex items-center gap-4 mt-2">
-            <p className="text-2xl font-bold">
-              <IndianRupee className="inline-block" />
-              {product.discount}
-            </p>
-            <p className="text-sm text-muted-foreground line-through">
-              <IndianRupee className="inline-block w-4 h-4" />
-              {product.price}
-            </p>
-            <Badge variant="outline" className="px-2 py-1">
-              Save{" "}
-              {calculateDiscountPercentage(product.price, product.discount)}%
-            </Badge>
+          </div>
+          <div className="grid gap-4 mt-5">
+            <Suspense
+              fallback={
+                <>
+                  <div className="w-full h-8 bg-zinc-600 rounded-full animate-pulse"></div>
+                  <div className="w-full h-6 mt-2 bg-zinc-600 rounded-full animate-pulse"></div>
+                  <div className="w-full h-4 mt-2 bg-zinc-600 rounded-full animate-pulse"></div>
+                </>
+              }
+            >
+              <div
+                className="text-muted-foreground leading-relaxed dsc px-4"
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              ></div>
+            </Suspense>
           </div>
         </div>
-        <div className="grid gap-2">
-          {product.isDraft ? (
-            <div className="py-2 w-full px-4 bg-red-600 text-white justify-center rounded-md flex items-center gap-2">
-              <Package className="w-4 h-4" />
-              <span>Product Out Of Stock</span>
-            </div>
-          ) : product.isAvailable ? (
-            <Link
-              href={`/product/buyon/${params.id}/whatsapp`}
-              className="flex items-center justify-center bg-zinc-900 text-white py-2 tracking-tight rounded-md hover:bg-zinc-700 hover:text-white/75 transition gap-2"
-            >
-              <PhoneIcon className="w-5 h-5" />
-              Buy on WhatsApp
-            </Link>
-          ) : (
-            <div className="py-2 w-full px-4 bg-yellow-600 text-white justify-center rounded-md flex items-center gap-2">
-              <Package className="w-4 h-4" />
-              <span>Currently Unavailable</span>
-            </div>
-          )}
-        </div>
-        <div className="grid gap-4 mt-5">
-          <Suspense
-            fallback={
-              <>
-                <div className="w-full h-8 bg-zinc-600 rounded-full animate-pulse"></div>
-                <div className="w-full h-6 mt-2 bg-zinc-600 rounded-full animate-pulse"></div>
-                <div className="w-full h-4 mt-2 bg-zinc-600 rounded-full animate-pulse"></div>
-              </>
-            }
-          >
-            <div
-              className="text-muted-foreground leading-relaxed dsc px-4"
-              dangerouslySetInnerHTML={{ __html: product.description }}
-            ></div>
-          </Suspense>
-        </div>
       </div>
-    </div>
+    </Suspense>
   );
+}
+
+function calculateDiscountPercentage(
+  originalPrice: number,
+  discountedPrice: number
+) {
+  if (originalPrice <= 0) {
+    throw new Error("Original price must be greater than zero.");
+  }
+  const discount = originalPrice - discountedPrice;
+  const discountPercentage = (discount / originalPrice) * 100;
+  return Math.floor(discountPercentage);
 }
 
 function PhoneIcon(props: any) {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import WhatsApp from "@/components/Whatsapp";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Buy on Whatsapp",
@@ -18,7 +19,13 @@ export default async function Page({ params }: { params: { id: string } }) {
   let { product } = await req.json();
   if (!product.isDraft) {
     if (product.isAvailable) {
-      return <WhatsApp data={product} />;
+      return (
+        <>
+          <Suspense fallback={<p>Loading...</p>}>
+            <WhatsApp data={product} />
+          </Suspense>
+        </>
+      );
     } else {
       return <h2>Product Not Found</h2>;
     }

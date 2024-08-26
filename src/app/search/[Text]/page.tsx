@@ -23,7 +23,9 @@ const Page = async ({ params }: { params: { Text: string } }) => {
         <div className="container mx-auto px-4">
           <div className="flex gap-8">
             <div className="w-[350px] border-r-2 h-auto py-6 px-4">
-              <SearchNavbar products={products} />
+              <Suspense fallback={<p>Loading....</p>}>
+                <SearchNavbar products={products} />
+              </Suspense>
             </div>
             <div className="flex-1 mt-4">
               <Suspense

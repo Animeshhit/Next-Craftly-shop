@@ -1,4 +1,3 @@
-
 import SwiperBanner from "@/components/SwiperBanner";
 
 const Banners = async () => {
