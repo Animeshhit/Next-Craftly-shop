@@ -2,11 +2,7 @@ import { MiniProduct } from "@/types/MinimalProductType";
 import SearchProduct from "./SearchProduct";
 import Image from "next/image";
 
-export const SearchResults = async ({
-  products,
-}: {
-  products: MiniProduct[] | [];
-}) => {
+const SearchResults = ({ products }: { products: MiniProduct[] | [] }) => {
   return (
     <div>
       {products && products.length > 0 ? (
@@ -41,3 +37,5 @@ export const SearchResults = async ({
     </div>
   );
 };
+
+export default SearchResults;

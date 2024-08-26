@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import WhatsApp from "@/components/Whatsapp";
-import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import WhtLoader from "@/components/loading-components/WhatsappLoader";
 
 export const metadata: Metadata = {
@@ -8,6 +7,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Page({ params }: { params: { id: string } }) {
+  const WhatsApp = dynamic(() => import("@/components/Whatsapp"), {
+    suspense: true,
+    loading: () => <WhtLoader />,
+  });
   let req = await fetch(
     `${process.env.SERVERHOST}/api/v1/product?id=${params.id}`,
     { cache: "no-store" }
@@ -22,9 +25,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     if (product.isAvailable) {
       return (
         <>
-          <Suspense fallback={<WhtLoader />}>
-            <WhatsApp data={product} />
-          </Suspense>
+          <WhatsApp data={product} />
         </>
       );
     } else {
