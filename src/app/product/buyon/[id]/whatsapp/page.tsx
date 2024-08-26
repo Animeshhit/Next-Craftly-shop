@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import WhatsApp from "@/components/Whatsapp";
 import { Suspense } from "react";
+import WhtLoader from "@/components/loading-components/WhatsappLoader";
 
 export const metadata: Metadata = {
   title: "Buy on Whatsapp",
@@ -21,7 +22,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     if (product.isAvailable) {
       return (
         <>
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<WhtLoader />}>
             <WhatsApp data={product} />
           </Suspense>
         </>
