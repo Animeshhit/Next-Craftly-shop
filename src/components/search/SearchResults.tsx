@@ -2,7 +2,11 @@ import { MiniProduct } from "@/types/MinimalProductType";
 import SearchProduct from "./SearchProduct";
 import Image from "next/image";
 
-const SearchResults = ({ products }: { products: MiniProduct[] | [] }) => {
+const SearchResults = ({
+  products,
+}: {
+  products: MiniProduct[] | [] | null;
+}) => {
   return (
     <div>
       {products && products.length > 0 ? (

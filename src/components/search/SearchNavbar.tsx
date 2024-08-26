@@ -8,7 +8,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { MiniProduct } from "@/types/MinimalProductType";
 import { Suspense } from "react";
 
-const SearchNavbar = async ({ products }: { products: MiniProduct[] | [] }) => {
+const SearchNavbar = async ({
+  products,
+}: {
+  products: MiniProduct[] | [] | null;
+}) => {
   return (
     <>
       <Accordion type="single" collapsible>
