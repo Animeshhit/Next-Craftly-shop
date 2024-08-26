@@ -79,9 +79,7 @@ export default async function ProductView({
     <Suspense
       fallback={
         <>
-          <div className="my-6">
-            <ProductLoader />
-          </div>
+          <ProductLoader />
         </>
       }
     >
