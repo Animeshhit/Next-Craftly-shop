@@ -1,28 +1,34 @@
 "use client";
 import Link from "next/link";
-import { ShoppingCart, CircleUser } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAuthState } from "@/helper/getUser";
+import getInitials from "@/helper/getUserName";
+import { Skeleton } from "../ui/skeleton";
 
 const Navigation = () => {
-  const { isAuth } = useSelector((s: any) => s.auth);
+  const { isAuth, user } = useSelector((s: any) => s.auth);
 
   useEffect(() => {
-    getAuthState();
+    if (isAuth == null) {
+      getAuthState();
+    }
   }, []);
   return (
     <>
       {isAuth == null ? (
-        <p>Loading...</p>
+        <Skeleton className="w-[100px] h-8 bg-zinc-600 rounded-full" />
       ) : isAuth ? (
         <>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-3">
             <Link href="/" className="p-1">
               <ShoppingCart className="text-gray-800" />
             </Link>
-            <Link href="/" className="p-1">
-              <CircleUser className="text-gray-800" />
+            <Link href="/profile" className="p-1">
+              <div className="bg-zinc-700 w-[35px] h-[35px] flex items-center justify-center text-white rounded-full">
+                {getInitials(user.name)}
+              </div>
             </Link>
           </div>
         </>
