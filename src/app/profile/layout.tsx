@@ -6,7 +6,7 @@ export default function Layout({
 }>) {
   return (
     <>
-      <div className="container mx-auto px-4">
+      <div className="container mt-8 mx-auto px-4">
         <div className="flex">
           <SideNavbar />
           {children}

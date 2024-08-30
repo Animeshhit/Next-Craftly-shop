@@ -34,7 +34,7 @@ const Navigation = () => {
         </>
       ) : (
         <>
-          <Link
+          <Link 
             href="/auth/login"
             className="py-2 px-4 text-sm tracking-tight rounded-lg"
           >

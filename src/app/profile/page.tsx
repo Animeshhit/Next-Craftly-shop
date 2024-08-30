@@ -1,52 +1,106 @@
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+"use client";
+
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function Component() {
+  const [orders, setOrders] = useState([
+    {
+      id: "ORD001",
+      date: "2023-06-15",
+      total: 149.99,
+      status: "Delivered",
+    },
+    {
+      id: "ORD002",
+      date: "2023-05-20",
+      total: 79.99,
+      status: "Cancelled",
+    },
+    {
+      id: "ORD003",
+      date: "2023-04-01",
+      total: 299.99,
+      status: "Shipped",
+    },
+  ]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredOrders, setFilteredOrders] = useState(orders);
+  const handleSearch = (e: any) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+    setFilteredOrders(
+      orders.filter(
+        (order) =>
+          order.id.toLowerCase().includes(term) ||
+          order.date.toLowerCase().includes(term) ||
+          order.status.toLowerCase().includes(term)
+      )
+    );
+  };
   return (
-    <section className="flex-1 p-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Personal Information</h1>
-        <Button variant="link">Edit</Button>
-      </div>
-      <div className="grid grid-cols-2 gap-4 mt-4">
-        <div className="space-y-2">
-          <Label htmlFor="firstname">First Name</Label>
-          <Input id="firstname" placeholder="Animesh" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="lastname">Last Name</Label>
-          <Input id="lastname" placeholder="Kumbhakar" />
-        </div>
-      </div>
-      <div className="mt-4 space-y-2">
-        <Label>Your Gender</Label>
-        <RadioGroup defaultValue="male" className="flex space-x-4">
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="male" id="male" />
-            <Label htmlFor="male">Male</Label>
+    <>
+      <div className="px-8">
+        {filteredOrders.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {filteredOrders.map((order) => (
+              <Card key={order.id}>
+                <CardHeader>
+                  <CardTitle>Order #{order.id}</CardTitle>
+                  <CardDescription>{order.date}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between">
+                    <div>Total:</div>
+                    <div className="font-medium">${order.total.toFixed(2)}</div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div>Status:</div>
+                    <Badge variant="destructive">{order.status}</Badge>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="outline" size="sm">
+                    View Order
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
           </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="female" id="female" />
-            <Label htmlFor="female">Female</Label>
-          </div>
-        </RadioGroup>
+        ) : (
+          <p className="text-muted-foreground text-center">No Orders</p>
+        )}
       </div>
-      <div className="flex items-center justify-between mt-6">
-        <h2 className="text-lg font-semibold">Email Address</h2>
-        <Button variant="link">Edit</Button>
-      </div>
-      <div className="mt-2 space-y-2">
-        <Input value="animeshkum723126@gmail.com" readOnly />
-      </div>
-      <div className="flex items-center justify-between mt-6">
-        <h2 className="text-lg font-semibold">Mobile Number</h2>
-        <Button variant="link">Edit</Button>
-      </div>
-      <div className="mt-2 space-y-2">
-        <Input value="+918637058434" readOnly />
-      </div>
-    </section>
+    </>
+  );
+}
+
+function SearchIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.3-4.3" />
+    </svg>
   );
 }
