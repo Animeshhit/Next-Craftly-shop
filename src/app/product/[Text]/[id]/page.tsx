@@ -29,6 +29,8 @@ async function fetchProductData(id: string) {
     return product;
   } catch (error) {
     console.error("Error fetching product data:", error);
+
+    // Optionally, you can return a more specific error message or a default product object
     return null;
   }
 }
@@ -43,6 +45,7 @@ export async function generateMetadata({
   if (!product) {
     return {
       title: "Product Not Found",
+      description: "The product you are looking for does not exist.",
     };
   }
 
@@ -72,17 +75,19 @@ export default async function ProductView({
   const product = await fetchProductData(params.id);
 
   if (!product) {
-    return <h2>Product Not Found</h2>;
+    return (
+      <div className="max-w-2xl mx-auto py-12 px-4 md:px-6">
+        <h2 className="text-2xl font-bold text-center">Product Not Found</h2>
+        <p className="text-center text-muted-foreground mt-4">
+          The product you are looking for might have been removed or is
+          temporarily unavailable.
+        </p>
+      </div>
+    );
   }
 
   return (
-    <Suspense
-      fallback={
-        <>
-          <ProductLoader />
-        </>
-      }
-    >
+    <Suspense fallback={<ProductLoader />}>
       <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-12 px-4 md:px-6">
         <div className="grid gap-4">
           <Carousel className="rounded-lg overflow-hidden">

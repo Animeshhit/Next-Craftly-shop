@@ -26,7 +26,7 @@ const Navigation = () => {
               <ShoppingCart className="text-gray-800" />
             </Link>
             <Link href="/profile" className="p-1">
-              <div className="bg-zinc-700 w-[35px] h-[35px] flex items-center justify-center text-white rounded-full">
+              <div className="bg-zinc-800 w-[35px] h-[35px] flex items-center justify-center text-white rounded-full">
                 {getInitials(user.name)}
               </div>
             </Link>
