@@ -18,7 +18,7 @@ const footerLinks = [
         src: "/",
       },
       {
-        text: "chat On Whatsapp",
+        text: "Chat On Whatsapp",
         src: "/",
       },
     ],
@@ -96,8 +96,8 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer id="footer" className="py-12 mt-24 px-4 bg-gray-300">
-      <div className="container mx-auto">
+    <footer id="footer" className="pt-12 mt-24 bg-gray-300">
+      <div className="container mx-auto px-4 pb-12">
         <div className="grid lg:place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {footerLinks.map((footer, index) => {
             return (
@@ -123,18 +123,10 @@ const Footer = () => {
             );
           })}
         </div>
-        <h3 className="font-semibold mt-16 sm:text-xl">
-          Devloped By{" "}
-          <a
-            href="https://www.linkedin.com/in/animesh-kumbhakar"
-            target="_blank"
-            className="text-rose-500"
-          >
-            Animesh Kumbhakar{" "}
-          </a>
-          with ❤️
-        </h3>
       </div>
+      <h3 className="text-center text-sm py-1 tracking-tight bg-gray-400 text-black/85">
+        ©2024 All rights reserved by <b>JS Group</b>
+      </h3>
     </footer>
   );
 };
