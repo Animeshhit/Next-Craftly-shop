@@ -15,7 +15,25 @@ export const getAuthState = async () => {
       };
     }
 
-    // Step 2: If user data is not available, fetch it from the API
+    // // Step 2: Check if the auth-token is present in the cookies
+    // const token = document.cookie
+    //   .split("; ")
+    //   .find((row) => row.startsWith("auth-token="))
+    //   ?.split("=")[1];
+
+    // console.log(token, document.cookie);
+
+    // if (!token) {
+    //   // If no auth-token is found, return unauthenticated state
+    //   const state = {
+    //     isAuth: false,
+    //     user: null,
+    //   };
+    //   store.dispatch(getUser(state));
+    //   return state;
+    // }
+
+    // Step 3: If the auth-token is present, fetch user data from the API
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_HOST}/api/auth/login`,
       {
@@ -34,7 +52,7 @@ export const getAuthState = async () => {
       user: data.user,
     };
 
-    // Step 3: Dispatch the user data to the Redux store
+    // Step 4: Dispatch the user data to the Redux store
     store.dispatch(getUser(state));
     return state;
   } catch (error) {

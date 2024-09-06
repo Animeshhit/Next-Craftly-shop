@@ -22,7 +22,10 @@ export default function SwiperBanner({
             banners.map((banner: BannerType, index: number) => {
               return (
                 <CarouselItem key={index}>
-                  <Link href="/search/bottle" className="block w-full h-full">
+                  <Link
+                    href={banner.bannerLink}
+                    className="block w-full h-full"
+                  >
                     <div className="relative h-[500px] w-full overflow-hidden">
                       <div className="w-full h-full hidden md:block">
                         <ImageLoader
