@@ -122,7 +122,7 @@ const SearchBarForNav = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-[350px] relative lg:w-[450px] flex px-4 items-center border border-zinc-400 rounded-full gap-2"
+      className="w-[450px] relative lg:w-[450px] flex px-4 items-center border border-zinc-400 rounded-full gap-2"
       ref={searchRef}
     >
       <Search className="w-4 text-zinc-500" />

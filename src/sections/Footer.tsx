@@ -124,7 +124,7 @@ const Footer = () => {
           })}
         </div>
       </div>
-      <h3 className="text-center text-sm py-1 tracking-tight bg-gray-400 text-black/85">
+      <h3 className="text-center text-sm py-1 tracking-tight text-black/85">
         ©2024 All rights reserved by <b>JS Group</b>
       </h3>
     </footer>

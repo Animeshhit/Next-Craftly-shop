@@ -11,8 +11,10 @@ export default function Home() {
   });
   return (
     <>
-      <div className="container mx-auto">
+      <div className="max-w-[2000px] mx-auto">
         <Banners />
+      </div>
+      <div className="container mx-auto">
         <div className="my-12">
           <Featured />
         </div>
