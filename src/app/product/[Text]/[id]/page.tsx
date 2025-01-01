@@ -6,73 +6,18 @@ import {
 import { Badge } from "@/components/ui/badge";
 import ImageLoader from "@/components/ImageLoader";
 import { Suspense } from "react";
-import { Metadata } from "next";
 import { IndianRupee, Package } from "lucide-react";
 import Link from "next/link";
+import { client } from "@/lib/client";
 import ProductLoader from "@/components/loading-components/ProductLoading";
-
-async function fetchProductData(id: string) {
-  try {
-    const response = await fetch(
-      `${process.env.SERVERHOST}/api/v1/product?id=${id}`,
-      {
-        cache: "no-store",
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch product data: ${response.statusText}`);
-    }
-
-    const { product } = await response.json();
-
-    return product;
-  } catch (error) {
-    console.error("Error fetching product data:", error);
-
-    // Optionally, you can return a more specific error message or a default product object
-    return null;
-  }
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const product = await fetchProductData(params.id);
-
-  if (!product) {
-    return {
-      title: "Product Not Found",
-      description: "The product you are looking for does not exist.",
-    };
-  }
-
-  return {
-    title: `${product.name}`,
-    description: product.description.slice(0, 160),
-    openGraph: {
-      title: product.name,
-      description: product.description.slice(0, 160),
-      images: [
-        {
-          url: product.productImage,
-          width: 800,
-          height: 600,
-          alt: product.name,
-        },
-      ],
-    },
-  };
-}
+import { GetAProductQuery } from "@/query/querys";
 
 export default async function ProductView({
   params,
 }: {
   params: { id: string };
 }) {
-  const product = await fetchProductData(params.id);
+  const product = await client.fetch(GetAProductQuery(params.id));
 
   if (!product) {
     return (
@@ -115,77 +60,37 @@ export default async function ProductView({
             </CarouselContent>
           </Carousel>
         </div>
-        <div className="grid gap-4">
+        <div className="grid">
           <div>
             <h1 className="text-3xl font-bold">{product.name}</h1>
             <div className="flex items-center gap-4 mt-2">
               <p className="text-2xl font-bold">
                 <IndianRupee className="inline-block" />
-                {product.discount}
+                {Math.round(
+                  Number(product.price) * (Number(product.discount) / 100)
+                )}
               </p>
               <p className="text-sm text-muted-foreground line-through">
                 <IndianRupee className="inline-block w-4 h-4" />
                 {product.price}
               </p>
               <Badge variant="outline" className="px-2 py-1">
-                Save{" "}
-                {calculateDiscountPercentage(product.price, product.discount)}%
+                Save {product.discount}%
               </Badge>
             </div>
-          </div>
-          <div className="grid gap-2">
-            {product.isDraft ? (
-              <div className="py-2 w-full px-4 bg-red-600 text-white justify-center rounded-md flex items-center gap-2">
-                <Package className="w-4 h-4" />
-                <span>Product Out Of Stock</span>
-              </div>
-            ) : product.isAvailable ? (
-              <Link
-                href={`/product/buyon/${params.id}/whatsapp`}
-                className="flex items-center justify-center bg-zinc-900 text-white py-2 tracking-tight rounded-md hover:bg-zinc-700 hover:text-white/75 transition gap-2"
-              >
-                <PhoneIcon className="w-5 h-5" />
-                Buy on WhatsApp
-              </Link>
-            ) : (
-              <div className="py-2 w-full px-4 bg-yellow-600 text-white justify-center rounded-md flex items-center gap-2">
-                <Package className="w-4 h-4" />
-                <span>Currently Unavailable</span>
-              </div>
-            )}
-          </div>
-          <div className="grid gap-4 mt-5">
-            <Suspense
-              fallback={
-                <>
-                  <div className="w-full h-8 bg-zinc-600 rounded-full animate-pulse"></div>
-                  <div className="w-full h-6 mt-2 bg-zinc-600 rounded-full animate-pulse"></div>
-                  <div className="w-full h-4 mt-2 bg-zinc-600 rounded-full animate-pulse"></div>
-                </>
-              }
+            <Link
+              href={`/product/buyon/${params.id}/whatsapp`}
+              className="flex mt-6 items-center justify-center bg-zinc-900 text-white py-2 tracking-tight rounded-md hover:bg-zinc-700 hover:text-white/75 transition gap-2"
             >
-              <div
-                className="text-muted-foreground leading-relaxed dsc px-4"
-                dangerouslySetInnerHTML={{ __html: product.description }}
-              ></div>
-            </Suspense>
+              <PhoneIcon className="w-5 h-5" />
+              Buy on WhatsApp
+            </Link>
+            <p className="mt-6 text-foreground">{product.description}</p>
           </div>
         </div>
       </div>
     </Suspense>
   );
-}
-
-function calculateDiscountPercentage(
-  originalPrice: number,
-  discountedPrice: number
-) {
-  if (originalPrice <= 0) {
-    throw new Error("Original price must be greater than zero.");
-  }
-  const discount = originalPrice - discountedPrice;
-  const discountPercentage = (discount / originalPrice) * 100;
-  return Math.floor(discountPercentage);
 }
 
 function PhoneIcon(props: any) {

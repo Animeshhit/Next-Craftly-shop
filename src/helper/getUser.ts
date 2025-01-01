@@ -1,5 +1,6 @@
 import store from "@/lib/store/store";
 import { getUser } from "@/lib/store/slices/authSlice";
+import { HOST } from "@/lib/env";
 
 export const getAuthState = async () => {
   try {
@@ -34,13 +35,10 @@ export const getAuthState = async () => {
     // }
 
     // Step 3: If the auth-token is present, fetch user data from the API
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST}/api/auth/login`,
-      {
-        method: "GET",
-        credentials: "include", // Important to include cookies
-      }
-    );
+    const response = await fetch(`${HOST}/api/auth/login`, {
+      method: "GET",
+      credentials: "include", // Important to include cookies
+    });
 
     if (!response.ok) {
       throw new Error(`Failed to fetch user data: ${response.statusText}`);

@@ -27,14 +27,14 @@ const Navigation = () => {
             </Link>
             <Link href="/profile" className="p-1">
               <div className="bg-zinc-800 w-[35px] h-[35px] flex items-center justify-center text-white rounded-full">
-                {getInitials(user.name)}
+                <span>{getInitials(user.name)}</span>
               </div>
             </Link>
           </div>
         </>
       ) : (
         <>
-          <Link 
+          <Link
             href="/auth/login"
             className="py-2 px-4 text-sm tracking-tight rounded-lg"
           >

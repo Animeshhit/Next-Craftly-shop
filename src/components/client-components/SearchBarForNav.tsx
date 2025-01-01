@@ -1,66 +1,52 @@
 "use client";
 
-import React, {
-  useState,
-  useEffect,
-  useMemo,
-  useCallback,
-  useRef,
-} from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Search } from "lucide-react";
-import { MiniProduct } from "@/types/MinimalProductType";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { client } from "@/lib/client";
+import { searchAProducutQuery } from "@/query/querys";
+
+interface ProductSearchResult {
+  _id: string;
+  name: string;
+}
 
 const SearchBarForNav = () => {
   const [searchText, setSearchText] = useState("");
-  const [searchRes, setSearchRes] = useState<null | MiniProduct[]>(null);
+  const [searchRes, setSearchRes] = useState<ProductSearchResult[] | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const searchRef = useRef<HTMLFormElement | null>(null);
+  const searchRef = useRef<HTMLFormElement>(null);
 
-  const getSearchResults = useCallback(
-    async (controller: AbortController) => {
-      try {
-        setIsLoading(true);
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVERHOST}/api/v1/search?page=1&limit=12&q=${searchText}`,
-          { signal: controller.signal }
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setSearchRes(data.products || []);
-        } else {
-          setSearchRes([]);
-        }
-      } catch (err: any) {
-        if (err.name !== "AbortError") {
-          console.error(err);
-          setSearchRes([]);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [searchText]
-  );
-
+  // Debounced search
   useEffect(() => {
-    if (searchText.length > 0) {
-      const controller = new AbortController();
-      const debounceTimeout = setTimeout(() => {
-        getSearchResults(controller);
-      }, 500);
+    const delayDebounceFn = setTimeout(() => {
+      if (searchText.trim().length > 0) {
+        getItems(searchText);
+      } else {
+        setSearchRes(null);
+      }
+    }, 300); // Delay in milliseconds
 
-      return () => {
-        clearTimeout(debounceTimeout);
-        controller.abort();
-      };
-    } else {
-      setSearchRes(null);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchText]);
+
+  const getItems = async (query: string) => {
+    try {
+      setIsLoading(true);
+      const data = await client.fetch(searchAProducutQuery(query));
+      console.log(data);
+      setSearchRes(data);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+    } finally {
+      setIsLoading(false);
     }
-  }, [searchText, getSearchResults]);
+  };
 
   useEffect(() => {
     setSearchText("");
@@ -73,8 +59,8 @@ const SearchBarForNav = () => {
         searchRef.current &&
         !searchRef.current.contains(event.target as Node)
       ) {
-        setSearchText(""); // Clear search text
-        setSearchRes(null); // Clear search results
+        setSearchText("");
+        setSearchRes(null);
       }
     };
 
@@ -91,7 +77,6 @@ const SearchBarForNav = () => {
     }
   };
 
-  // Memoize search results to avoid unnecessary re-renders
   const memoizedSearchResults = useMemo(() => {
     if (isLoading) {
       return (
@@ -99,25 +84,28 @@ const SearchBarForNav = () => {
           Loading...
         </p>
       );
-    } else if (searchRes && searchRes.length > 0) {
-      return searchRes.map((item: MiniProduct, index: number) => (
+    }
+    if (searchRes && searchRes.length > 0) {
+      return searchRes.map((item) => (
         <Link
-          href={`/product/Search Results/${item._id}`}
-          key={index}
+          href={`/product/${item.name}/${item._id}`}
+          key={item._id}
           className="text-sm flex items-center gap-2 hover:bg-zinc-200 rounded-md cursor-pointer py-1 px-2"
         >
           <Search className="w-3 h-3" />
           {item.name}
         </Link>
       ));
-    } else {
+    }
+    if (searchText.trim().length > 0) {
       return (
         <p className="text-sm rounded-md cursor-pointer py-1 px-2">
           No search results
         </p>
       );
     }
-  }, [searchRes, isLoading]);
+    return null;
+  }, [searchRes, isLoading, searchText]);
 
   return (
     <form
@@ -136,7 +124,7 @@ const SearchBarForNav = () => {
         autoComplete="off"
       />
       {searchText.length > 0 && (
-        <div className="absolute bg-white flex flex-col gap-1 top-12 py-3 px-2 rounded-md shadow-lg inset-x-0">
+        <div className="absolute bg-white flex flex-col gap-1 top-12 py-3 px-2 rounded-md shadow-lg inset-x-0 z-50">
           {memoizedSearchResults}
         </div>
       )}

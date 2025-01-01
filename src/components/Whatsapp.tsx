@@ -19,6 +19,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Product } from "@/types/ProductType";
 
 // Define the shape of your form data
 interface FormData {
@@ -27,7 +28,7 @@ interface FormData {
   something: string;
 }
 
-export default function WhatsApp({ data }: { data: any }) {
+export default function WhatsApp({ data }: { data: Product }) {
   const [formData, setFormData] = useState<FormData>({
     purpose: "",
     date: null,
