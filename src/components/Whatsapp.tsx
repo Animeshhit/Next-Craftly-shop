@@ -20,6 +20,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/types/ProductType";
+import { HOST } from "@/lib/env";
 
 // Define the shape of your form data
 interface FormData {
@@ -61,8 +62,8 @@ export default function WhatsApp({ data }: { data: Product }) {
 
     const message = `Hello, I am interested in buying *${
       data.name
-    }* product url : ${`https://thecraftly.shop/product/${encodeURIComponent(
-      data.isFeatured ? "Newly Added" : "Best Seller"
+    }* product url : ${`${HOST}/product/${encodeURIComponent(
+      data.name
     )}/${data._id}`}
     
     *Purpose :* ${purpose}.
