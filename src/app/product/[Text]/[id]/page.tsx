@@ -12,17 +12,19 @@ import { client } from "@/lib/client";
 import ProductLoader from "@/components/loading-components/ProductLoading";
 import { GetAProductQuery } from "@/query/querys";
 import MarkdownRenderer from "@/components/ProductDescription";
+import { Product } from "@/types/ProductType";
 
 export default async function ProductView({
   params,
 }: {
   params: { id: string };
 }) {
-  const product = await client.fetch(
+  const product: Product = await client.fetch(
     GetAProductQuery(params.id),
     {},
     { cache: "no-store" }
   );
+  console.log(product);
 
   if (!product) {
     return (
@@ -137,7 +139,7 @@ export default async function ProductView({
               )}
 
               <div className="mt-6">
-                {product.isCustomizable ? (
+                {product.isCustomizeable ? (
                   <Badge variant="outline" className="py-2 gap-2 bg-green-900">
                     <CircleCheck className="w-4 h-4" />
                     Customizable
