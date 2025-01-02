@@ -30,7 +30,8 @@ const ProductCard = ({ Text, product }: { Text: string; product: Product }) => {
             <IndianRupee className="w-3 h-3" />
             {/* <img src="/Price.svg" alt="rs" className="w-3 h-3" /> */}
             {Math.round(
-              Number(product.price) * (Number(product.discount) / 100)
+              Number(product.price) -
+                Number(product.price) * (Number(product.discount) / 100)
             )}
           </p>
         </div>

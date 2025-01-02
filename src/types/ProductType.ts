@@ -2,6 +2,10 @@ interface Product {
   _id: string; // Unique identifier for the product
   slug: string;
   name: string;
+  fullDescription: string;
+  isCustomizeable: boolean;
+  sizes: { name: string; size: string }[] | null;
+  colors: { name: string; color: string }[] | null;
   description: string;
   price: number;
   discount: number;

@@ -6,18 +6,23 @@ import {
 import { Badge } from "@/components/ui/badge";
 import ImageLoader from "@/components/ImageLoader";
 import { Suspense } from "react";
-import { IndianRupee, Package } from "lucide-react";
+import { CircleCheck, CircleOff, Cog, IndianRupee } from "lucide-react";
 import Link from "next/link";
 import { client } from "@/lib/client";
 import ProductLoader from "@/components/loading-components/ProductLoading";
 import { GetAProductQuery } from "@/query/querys";
+import MarkdownRenderer from "@/components/ProductDescription";
 
 export default async function ProductView({
   params,
 }: {
   params: { id: string };
 }) {
-  const product = await client.fetch(GetAProductQuery(params.id));
+  const product = await client.fetch(
+    GetAProductQuery(params.id),
+    {},
+    { cache: "no-store" }
+  );
 
   if (!product) {
     return (
@@ -67,7 +72,8 @@ export default async function ProductView({
               <p className="text-2xl font-bold">
                 <IndianRupee className="inline-block" />
                 {Math.round(
-                  Number(product.price) * (Number(product.discount) / 100)
+                  Number(product.price) -
+                    Number(product.price) * (Number(product.discount) / 100)
                 )}
               </p>
               <p className="text-sm text-muted-foreground line-through">
@@ -86,6 +92,72 @@ export default async function ProductView({
               Buy on WhatsApp
             </Link>
             <p className="mt-6 text-foreground">{product.description}</p>
+            <div className="product__types mt-6">
+              {product.colors && product.colors.length > 0 && (
+                <div className="color-options">
+                  <h2 className="text-sm font-semibold text-zinc-700">
+                    Available Colors
+                  </h2>
+                  <div className="flex items-center gap-2 mt-2">
+                    {product.colors.map(
+                      (
+                        color: { name: string; color: string },
+                        index: number
+                      ) => (
+                        <div
+                          key={index}
+                          className="border flex items-center justify-center rounded-full w-6 h-6"
+                          style={{ backgroundColor: color.color }}
+                        >
+                          <span className="text-xs sr-only">{color.name}</span>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
+              {product.sizes && product.sizes.length > 0 && (
+                <div className="size-options mt-4">
+                  <h2 className="text-sm font-semibold text-zinc-700">
+                    Available Sizes
+                  </h2>
+                  <div className="flex items-center gap-2 mt-2">
+                    {product.sizes.map(
+                      (size: { name: string; size: string }, index: number) => (
+                        <div
+                          key={index}
+                          className="border flex items-center justify-center border-black rounded-md w-6 h-6"
+                        >
+                          <span className="text-xs">{size.size}</span>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-6">
+                {product.isCustomizable ? (
+                  <Badge variant="outline" className="py-2 gap-2 bg-green-900">
+                    <CircleCheck className="w-4 h-4" />
+                    Customizable
+                  </Badge>
+                ) : (
+                  <Badge variant="default" className="py-2 gap-2 bg-red-900">
+                    <CircleOff className="w-4 h-4" />
+                    Non-Customizable
+                  </Badge>
+                )}
+              </div>
+              <div className="mt-6">
+                <h2 className="text-sm font-semibold text-zinc-700">
+                  Product Description
+                </h2>
+                <MarkdownRenderer
+                  markdownContent={`${product.fullDescription}`}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

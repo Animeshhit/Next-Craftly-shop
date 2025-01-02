@@ -1,26 +1,14 @@
 export const ProductsQuery = `*[_type == "products"] {
   _id,
   name,
-  description,
   price,
   discount,
   "productImage": productImage.asset->url,
-  "productImages": productImages[].asset->url,
   "categories": categories[]->title,
-  productUniqueId,
   isFeatured,
   isBestSeller,
-  reviews[] {
-    reviewer,
-    rating,
-    comment
-  },
   isAvailable,
-  sold,
-  tags,
   "slug":slug.current,
-  createdAt,
-  updatedAt
 }
 `;
 
@@ -29,6 +17,10 @@ export const GetAProductQuery = (id: string) =>
   _id,
   name,
   description,
+   isCustomizeable,
+  "sizes":sizes[] -> {name,size},
+  "colors":colors[] -> {name,color},
+  fullDescription,
   price,
   discount,
   "productImage": productImage.asset->url,
@@ -57,3 +49,26 @@ export const searchAProducutQuery = (
   name,
 }
 `;
+
+export const LegalTermsQuery = `*[_type == "legal"] {
+  _id,
+  name,
+  returnPolicy,
+    shippingPolicy,
+    privacyPolicy,
+    termsAndConditions
+}`;
+
+export const GetCategoryQuery = `*[_type == "category"] {
+  _id,
+  title,
+  "slug":slug.current,
+  "image":image.asset->url
+}[0...4]`;
+
+export const GetAllCategoryQuery = `*[_type == "category"] {
+  _id,
+  title,
+  "slug":slug.current,
+  "image":image.asset->url
+}`;
