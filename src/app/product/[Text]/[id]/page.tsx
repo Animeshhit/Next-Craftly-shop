@@ -91,7 +91,7 @@ export default async function ProductView({
               className="flex mt-6 items-center justify-center bg-zinc-900 text-white py-2 tracking-tight rounded-md hover:bg-zinc-700 hover:text-white/75 transition gap-2"
             >
               <PhoneIcon className="w-5 h-5" />
-              Buy on WhatsApp
+              Get on WhatsApp
             </Link>
             <p className="mt-6 text-foreground">{product.description}</p>
             <div className="product__types mt-6">
@@ -140,7 +140,10 @@ export default async function ProductView({
 
               <div className="mt-6">
                 {product.isCustomizeable ? (
-                  <Badge variant="outline" className="py-2 gap-2 bg-green-900">
+                  <Badge
+                    variant="outline"
+                    className="py-2 gap-2 bg-green-900 text-white"
+                  >
                     <CircleCheck className="w-4 h-4" />
                     Customizable
                   </Badge>
