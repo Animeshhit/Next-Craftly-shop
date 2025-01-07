@@ -27,7 +27,9 @@ async function Categories({
   return (
     <>
       <div className="container mx-auto px-4">
-        <h2 className="my-12 md:my-8 text-2xl md:text-3xl font-semibold">{fromUrlFriendly(params.name)}</h2>
+        <h2 className="my-12 md:my-8 text-2xl font-semibold">
+          {fromUrlFriendly(params.name)}
+        </h2>
         <div className="my-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {targetProducts &&
             targetProducts.map((item: Product, index: Key) => {
