@@ -2,15 +2,15 @@ import React from "react";
 import Link from "next/link";
 
 const footerLinks = [
-  // {
-  //   heading: "The Craftly Shop",
-  //   links: [
-  //     { text: "About us", src: "/" },
-  //     { text: "Contact us", src: "/" },
-  //     { text: "Contact", src: "/" },
-  //     { text: "Chat On Whatsapp", src: "/" },
-  //   ],
-  // },
+  {
+    heading: "The Craftly Shop",
+    links: [
+      { text: "About us", src: "/About/" },
+      { text: "Contact us", src: "/" },
+      { text: "Contact", src: "/" },
+      { text: "Chat On Whatsapp", src: "/" },
+    ],
+  },
   // {
   //   heading: "Services",
   //   links: [
