@@ -36,7 +36,7 @@ export default async function CategoriesGrid({ query }: { query: string }) {
             {categories.map((category) => (
               <Link
                 key={category._id}
-                href={`/category/${category.slug}/${category._id}`}
+                href={`/categories/${category.slug}/${category._id}`}
               >
                 <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
                   <CardContent className="p-0">

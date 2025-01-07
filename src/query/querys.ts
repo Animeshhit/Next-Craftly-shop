@@ -12,6 +12,21 @@ export const ProductsQuery = `*[_type == "products"] {
 }
 `;
 
+export const GetCategoryProductsQuery = (
+  category: string
+) => `*[_type == "products" && "${category}" in categories[]->title] {
+  _id,
+  name,
+  price,
+  discount,
+  "productImage": productImage.asset->url,
+  "categories": categories[]->title,
+  isFeatured,
+  isBestSeller,
+  isAvailable,
+  "slug":slug.current,
+}`;
+
 export const GetAProductQuery = (id: string) =>
   `*[_type == "products" && _id == "${id}"][0] {
   _id,
