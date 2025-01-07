@@ -59,10 +59,12 @@ export const GetAProductQuery = (id: string) =>
 
 export const searchAProducutQuery = (
   searchString: string
-) => `*[_type == "products" && (name match "${searchString}" || "${searchString}" in tags[])] {
+) => `*[_type == "products" && (name match "*${searchString}*" || "${searchString}" in tags)] {
   _id,
   name,
+  tags
 }
+
 `;
 
 export const LegalTermsQuery = `*[_type == "legal"] {
