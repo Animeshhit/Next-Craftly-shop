@@ -140,7 +140,7 @@ export default function WhatsApp({ data }: { data: Product }) {
             <Input
               id="cupon"
               placeholder="Do You have any Cupon Code?"
-              value={formData.purpose}
+              value={formData.cupon}
               onChange={handleChange}
             
             />
