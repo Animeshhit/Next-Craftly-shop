@@ -27,7 +27,7 @@ interface FormData {
   purpose: string;
   date: Date | null;
   something: string;
-  cupon: string | null;
+  cupon: string ;
 }
 
 export default function WhatsApp({ data }: { data: Product }) {
@@ -85,7 +85,7 @@ export default function WhatsApp({ data }: { data: Product }) {
         <CardHeader>
           <CardTitle>Share Your Thoughts</CardTitle>
           <CardDescription>
-            Tell us what's on your mind and how we can help.
+            Tell us what is on your mind and how we can help.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
