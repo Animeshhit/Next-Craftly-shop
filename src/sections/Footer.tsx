@@ -5,7 +5,7 @@ const footerLinks = [
   {
     heading: "The Craftly Shop",
     links: [
-      { text: "About us", src: "/" },
+      { text: "About us", src: "/about" },
       { text: "Contact us", src: "/" },
       { text: "Contact", src: "/" },
       { text: "Chat On Whatsapp", src: "/" },
