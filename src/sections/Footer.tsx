@@ -2,24 +2,24 @@ import React from "react";
 import Link from "next/link";
 
 const footerLinks = [
-  // {
-  //   heading: "The Craftly Shop",
-  //   links: [
-  //     { text: "About us", src: "/about/#about-us" },
-  //     { text: "Contact us", src: "/" },
-  //     { text: "Contact", src: "/" },
-  //     { text: "Chat On Whatsapp", src: "/" },
-  //   ],
-  // },
-  // {
-  //   heading: "Services",
-  //   links: [
-  //     { text: "Track shipment", src: "/" },
-  //     { text: "Contact", src: "/" },
-  //     { text: "Login", src: "/auth/login" },
-  //     { text: "Join us", src: "/auth/register" },
-  //   ],
-  // },
+  {
+    heading: "The Craftly Shop",
+    links: [
+      { text: "About us", src: "/about/" },
+      { text: "Contact us", src: "/about/#contactUs" },
+      { text: "Contact", src: "/" },
+      { text: "Chat On Whatsapp", src: "/" },
+    ],
+  },
+  {
+    heading: "Services",
+    links: [
+      { text: "Track shipment", src: "/about" },
+      { text: "Contact", src: "/" },
+      { text: "Login", src: "/auth/login" },
+      { text: "Join us", src: "/auth/register" },
+    ],
+  },
   {
     heading: "Legal",
     links: [

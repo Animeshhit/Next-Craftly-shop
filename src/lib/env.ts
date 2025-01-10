@@ -1,5 +1,6 @@
-export const apiVersion =
-  process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-11-15";
+export const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-11-15";
+export const merchantID = process.env.PG_MERCHENT_ID;
+export const saltKey = process.env.PG_SALT_KEY;
 
 export const dataset = assertValue(
   process.env.NEXT_PUBLIC_SANITY_DATASET,
@@ -20,6 +21,8 @@ export const HOST = assertValue(
   process.env.NEXT_PUBLIC_HOST,
   "Missing environment variable: HOST"
 );
+
+
 
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
