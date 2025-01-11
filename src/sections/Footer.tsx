@@ -8,7 +8,7 @@ const footerLinks = [
       { text: "About us", src: "/about/" },
       { text: "Contact us", src: "/about/#contactUs" },
       { text: "Contact", src: "/about/#contactUs" },
-      { text: "Chat On Whatsapp", src: "https://wa.me/919609096095", target:"_blank"},
+      { text: "Chat On Whatsapp", src: "https://wa.me/919609096095"},
     ],
   },
   // {
