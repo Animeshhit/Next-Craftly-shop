@@ -8,7 +8,7 @@ const footerLinks = [
       { text: "About us", src: "/about/" },
       { text: "Contact us", src: "/about/#contactUs" },
       { text: "Contact", src: "/about/#contactUs" },
-      { text: "Chat On Whatsapp", src: "https://wa.me/919609096095"},
+      { text: "Chat On Whatsapp", src: "https://wa.me/919609096095" },
     ],
   },
   // {
@@ -35,9 +35,20 @@ const footerLinks = [
       { text: "Address :- Akulnagar", src: "/" },
       { text: "Murshidabad, West Bengal", src: "/" },
       { text: "India , 742302", src: "/" },
-       { text: " (24 x 7 Whatsapp Chatbot )", src: "https://wa.me/918503885083"} ,
-      { text: "+91 85038 85083 ", src: "https://wa.me/918503885083", class: "underline"} ,
-      { text: "+91 96090 96095", src: "https://919609096095" ,class: "underline"},
+      {
+        text: " (24 x 7 Whatsapp Chatbot )",
+        src: "https://wa.me/918503885083",
+      },
+      {
+        text: "+91 85038 85083 ",
+        src: "https://wa.me/918503885083",
+        class: "underline",
+      },
+      {
+        text: "+91 96090 96095",
+        src: "https://919609096095",
+        class: "underline",
+      },
       {
         text: "thecraftlyshop@gmail.com",
         src: "mailto:thecraftlyshop@gmail.com",
@@ -49,11 +60,11 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer id="footer" className="bg-gray-300 py-6">
+    <footer id="footer" className="bg-gray-300 pt-6">
       <div className="container mx-auto px-4">
-        <div className="grid lg:place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid lg:place-items-start sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {footerLinks.map((footer, footerIndex) => (
-            <ul key={footerIndex}>
+            <ul className="mx-auto" key={footerIndex}>
               <li className="font-bold mb-3">{footer.heading}</li>
               {footer.links.map((link, linkIndex) => (
                 <li key={linkIndex}>
@@ -71,7 +82,7 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      <h3 className="text-center text-sm py-1 tracking-tight text-black/85">
+      <h3 className="text-center mt-4 text-sm py-1 tracking-tight text-black/85">
         ©2025 All rights reserved by <b>JS Group</b>
       </h3>
     </footer>
