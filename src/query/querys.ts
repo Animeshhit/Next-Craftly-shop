@@ -76,6 +76,13 @@ export const LegalTermsQuery = `*[_type == "legal"] {
     termsAndConditions
 }`;
 
+export const AboutQuery = `*[_type == "about"] {
+  _id,
+  name,
+  aboutUs,
+  contactUs
+}`;
+
 
 export const GetCategoryQuery = `*[_type == "category"] {
   _id,
