@@ -35,8 +35,9 @@ const footerLinks = [
       { text: "Address :- Akulnagar", src: "/" },
       { text: "Murshidabad, West Bengal", src: "/" },
       { text: "India , 742302", src: "/" },
-      { text: "+91 85038 85083 (24 x 7 Whatsapp Chatbot )", src: "https://wa.me/918503885083"} ,
-      { text: "+91 96090 96095", src: "https://919609096095" },
+       { text: " (24 x 7 Whatsapp Chatbot )", src: "https://wa.me/918503885083"} ,
+      { text: "+91 85038 85083 ", src: "https://wa.me/918503885083", class: "underline"} ,
+      { text: "+91 96090 96095", src: "https://919609096095" ,class: "underline",\ },
       {
         text: "thecraftlyshop@gmail.com",
         src: "mailto:thecraftlyshop@gmail.com",
