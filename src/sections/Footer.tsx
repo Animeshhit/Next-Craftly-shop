@@ -11,15 +11,15 @@ const footerLinks = [
       { text: "Chat On Whatsapp", src: "/" },
     ],
   },
-  {
-    heading: "Services",
-    links: [
-      { text: "Track shipment", src: "/about" },
-      { text: "Contact", src: "/" },
-      { text: "Login", src: "/auth/login" },
-      { text: "Join us", src: "/auth/register" },
-    ],
-  },
+  // {
+  //   heading: "Services",
+  //   links: [
+  //     { text: "Track shipment", src: "/about" },
+  //     { text: "Contact", src: "/" },
+  //     { text: "Login", src: "/auth/login" },
+  //     { text: "Join us", src: "/auth/register" },
+  //   ],
+  // },
   {
     heading: "Legal",
     links: [
