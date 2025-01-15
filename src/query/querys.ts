@@ -12,6 +12,21 @@ export const ProductsQuery = `*[_type == "products"] {
 }
 `;
 
+export const GetCategoryProductsQuery = (
+  category: string
+) => `*[_type == "products" && "${category}" in categories[]->title] {
+  _id,
+  name,
+  price,
+  discount,
+  "productImage": productImage.asset->url,
+  "categories": categories[]->title,
+  isFeatured,
+  isBestSeller,
+  isAvailable,
+  "slug":slug.current,
+}`;
+
 export const GetAProductQuery = (id: string) =>
   `*[_type == "products" && _id == "${id}"][0] {
   _id,
@@ -44,10 +59,12 @@ export const GetAProductQuery = (id: string) =>
 
 export const searchAProducutQuery = (
   searchString: string
-) => `*[_type == "products" && (name match "${searchString}" || "${searchString}" in tags[])] {
+) => `*[_type == "products" && (name match "*${searchString}*" || "${searchString}" in tags)] {
   _id,
   name,
+  tags
 }
+
 `;
 
 export const LegalTermsQuery = `*[_type == "legal"] {
@@ -64,6 +81,13 @@ export const AboutQuery = `*[_type == "about"] {
  aboutUs
 }`;
 
+export const AboutQuery = `*[_type == "about"] {
+  _id,
+  name,
+  aboutUs,
+  contactUs
+}`;
+
 export const GetCategoryQuery = `*[_type == "category"] {
   _id,
   title,
@@ -76,4 +100,16 @@ export const GetAllCategoryQuery = `*[_type == "category"] {
   title,
   "slug":slug.current,
   "image":image.asset->url
+}`;
+
+export const BannersQuery = `*[_type == "banners"] {
+ _id,
+ bannerTitle,
+ bannerLink,
+ "bannerImage":bannerImage.asset -> url
+}`;
+
+export const GetInfosQuery = `*[_type == "info"]{
+ _id,
+ text
 }`;

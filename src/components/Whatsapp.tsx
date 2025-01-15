@@ -27,6 +27,7 @@ interface FormData {
   purpose: string;
   date: Date | null;
   something: string;
+  cupon: string ;
 }
 
 export default function WhatsApp({ data }: { data: Product }) {
@@ -34,6 +35,7 @@ export default function WhatsApp({ data }: { data: Product }) {
     purpose: "",
     date: null,
     something: "",
+    cupon:"",
   });
 
   const handleChange = (
@@ -53,7 +55,7 @@ export default function WhatsApp({ data }: { data: Product }) {
   };
 
   const handleSubmit = () => {
-    const { purpose, date, something } = formData;
+    const { purpose, date, something , cupon } = formData;
 
     if (!purpose || !date || !something) {
       alert("All fields are required. Please fill in all the details.");
@@ -68,7 +70,8 @@ export default function WhatsApp({ data }: { data: Product }) {
     
     *Purpose :* ${purpose}.
     *Expect To Be Delivered :* ${date.toLocaleDateString()}.
-    *Description :* ${something}`;
+    *Description :* ${something}
+    *Cupon Code:* ${cupon}`;
 
     const encodedMessage = encodeURIComponent(message);
     const url = `https://wa.me/9609096095` + "?text=" + encodedMessage;
@@ -82,7 +85,7 @@ export default function WhatsApp({ data }: { data: Product }) {
         <CardHeader>
           <CardTitle>Share Your Thoughts</CardTitle>
           <CardDescription>
-            Tell us what&aposs on your mind and how we can help.
+            Tell us what is on your mind and how we can help.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -130,6 +133,16 @@ export default function WhatsApp({ data }: { data: Product }) {
               value={formData.something}
               onChange={handleChange}
               required
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="cupon">Cupon Code</Label>
+            <Input
+              id="cupon"
+              placeholder="Do You have any Cupon Code?"
+              value={formData.cupon}
+              onChange={handleChange}
+            
             />
           </div>
         </CardContent>
