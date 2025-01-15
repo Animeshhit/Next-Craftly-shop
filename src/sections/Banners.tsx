@@ -1,18 +1,15 @@
 import SwiperBanner from "@/components/SwiperBanner";
+import { client } from "@/lib/client";
+import { BannersQuery } from "@/query/querys";
+import { BannerType } from "@/types/BannerType";
 
 const Banners = async () => {
-  let req = await fetch(`${process.env.SERVERHOST}/api/v1/banners`, {
-    next: { revalidate: 300 },
-  });
-  if (!req.ok) {
-    return (
-      <div className="w-full mt-8 h-[500px] bg-zinc-600 rounded-md">
-        Something Went Wrong !!
-      </div>
-    );
-  }
-  let data = await req.json();
-  return <SwiperBanner banners={data} />;
+  let req: BannerType[] | [] = await client.fetch(
+    BannersQuery,
+    {},
+    { cache: "no-store" }
+  );
+  return <SwiperBanner banners={req} />;
 };
 
 export default Banners;

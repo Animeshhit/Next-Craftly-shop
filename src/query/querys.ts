@@ -83,7 +83,6 @@ export const AboutQuery = `*[_type == "about"] {
   contactUs
 }`;
 
-
 export const GetCategoryQuery = `*[_type == "category"] {
   _id,
   title,
@@ -96,4 +95,16 @@ export const GetAllCategoryQuery = `*[_type == "category"] {
   title,
   "slug":slug.current,
   "image":image.asset->url
+}`;
+
+export const BannersQuery = `*[_type == "banners"] {
+ _id,
+ bannerTitle,
+ bannerLink,
+ "bannerImage":bannerImage.asset -> url
+}`;
+
+export const GetInfosQuery = `*[_type == "info"]{
+ _id,
+ text
 }`;
