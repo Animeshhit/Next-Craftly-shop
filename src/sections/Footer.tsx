@@ -64,7 +64,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid lg:place-items-start sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {footerLinks.map((footer, footerIndex) => (
-            <ul className="mx-auto" key={footerIndex}>
+            <ul className="md:mx-auto" key={footerIndex}>
               <li className="font-bold mb-3">{footer.heading}</li>
               {footer.links.map((link, linkIndex) => (
                 <li key={linkIndex}>
