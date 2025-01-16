@@ -24,7 +24,7 @@ export default function CouponPopup() {
 
   useEffect(() => {
     // Open the popup automatically after a short delay
-    if (pathName != "payment") {
+    if (pathName != "/payment") {
       const timer = setTimeout(() => setOpen(true), 1000);
       return () => clearTimeout(timer);
     }
