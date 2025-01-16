@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { usePathname } from "next/navigation";
 import {
   Dialog,
   DialogContent,
@@ -15,6 +16,7 @@ import {
 import { toast } from "@/hooks/use-toast";
 
 export default function CouponPopup() {
+  const pathName = usePathname();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [coupon, setCoupon] = useState("");
@@ -22,9 +24,12 @@ export default function CouponPopup() {
 
   useEffect(() => {
     // Open the popup automatically after a short delay
-    const timer = setTimeout(() => setOpen(true), 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (pathName == "/") {
+      const timer = setTimeout(() => setOpen(true), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [pathName]);
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
