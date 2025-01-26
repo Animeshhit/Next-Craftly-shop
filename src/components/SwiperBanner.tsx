@@ -6,7 +6,7 @@ import {
   CarouselNext,
 } from "@/components/ui/carousel";
 import { BannerType } from "@/types/BannerType";
-import ImageLoader from "./ImageLoader";
+import ImageLoader from "../utills/ImageLoader";
 import Link from "next/link";
 
 export default function SwiperBanner({

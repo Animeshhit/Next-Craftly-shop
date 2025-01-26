@@ -1,4 +1,4 @@
-import MarkdownRenderer from "@/components/ProductDescription";
+import MarkdownRenderer from "@/utills/MarkDownRenderer";
 import { client } from "@/lib/client";
 import { LegalTermsQuery } from "@/query/querys";
 

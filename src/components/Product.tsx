@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { IndianRupee } from "lucide-react";
-import ImageLoader from "./ImageLoader";
+import ImageLoader from "../utills/ImageLoader";
 import { Product } from "@/types/ProductType";
 
 const ProductCard = ({ Text, product }: { Text: string; product: Product }) => {

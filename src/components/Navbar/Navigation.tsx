@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAuthState } from "@/helper/getUser";
 import getInitials from "@/helper/getUserName";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Navigation = () => {
   const { isAuth, user } = useSelector((s: any) => s.auth);

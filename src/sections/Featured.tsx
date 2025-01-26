@@ -1,5 +1,5 @@
 import { Product } from "@/types/ProductType";
-import FeaturedSection from "@/components/FeaturedSection";
+import FeaturedSection from "@/components/Home/FeaturedSection";
 const Featured = ({ products }: { products: Product[] }) => {
   return (
     <section id="featured">

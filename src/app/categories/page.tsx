@@ -1,10 +1,15 @@
-import CategoriesGrid from "@/components/Categories";
+import CategoriesLoader from "@/components/Loading/CategoriesLoader";
 import { GetAllCategoryQuery } from "@/query/querys";
+import dynamic from "next/dynamic";
 
 function page() {
+  const Categories = dynamic(() => import("@/sections/Categories"), {
+    ssr: true,
+    loading: () => <CategoriesLoader />,
+  });
   return (
     <>
-      <CategoriesGrid query={GetAllCategoryQuery} />
+      <Categories query={GetAllCategoryQuery} />
     </>
   );
 }

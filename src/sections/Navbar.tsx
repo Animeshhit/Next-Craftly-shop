@@ -1,29 +1,20 @@
 import { Search } from "lucide-react";
-import SearchBarForNav from "./client-components/SearchBarForNav";
+import SearchBarForNav from "../components/Navbar/SearchBarForNav";
 import Link from "next/link";
-import Navigation from "./client-components/Navbar";
-import CouponPopup from "./couponPopup";
-import { client } from "@/lib/client";
-import { GetInfosQuery } from "@/query/querys";
+import Navigation from "../components/Navbar/Navigation";
+import dynamic from "next/dynamic";
+import { Skeleton } from "../components/ui/skeleton";
+
 const Navbar = async () => {
-  let infos: { _id: string; text: string }[] | [] = await client.fetch(
-    GetInfosQuery,
-    {},
-    { cache: "no-cache" }
-  );
+  const NavBanner = dynamic(() => import("../components/Navbar/NavBanner"), {
+    ssr: true,
+    loading: () => <Skeleton className="py-2 animate-pulse" />,
+  });
+
   return (
     <>
       <header className="backdrop-blur-lg border-b bg-white/75 sticky top-0 inset-x-0 z-10">
-        <div className="bg-black py-1">
-          <div className="container mx-auto">
-            <div className="flex items-center justify-center gap-2">
-              <p className="text-xs tracking-tight text-white/75 text-center">
-                {infos[0].text}
-              </p>
-              <CouponPopup />
-            </div>
-          </div>
-        </div>
+        <NavBanner />
         <div className="py-1">
           <div className="container mx-auto">
             <div className="flex items-center justify-between">

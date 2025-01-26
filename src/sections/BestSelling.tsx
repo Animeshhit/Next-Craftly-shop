@@ -1,5 +1,5 @@
 import { Product } from "@/types/ProductType";
-import BestSellingSection from "@/components/BestSellingSection";
+import BestSellingSection from "@/components/Home/BestSellingSection";
 
 const BestSelling = ({ products }: { products: Product[] }) => {
   return (

@@ -1,30 +1,33 @@
-import { client } from "@/lib/client";
-import { ProductsQuery } from "@/query/querys";
-import Featured from "@/sections/Featured";
-import BestSelling from "@/sections/BestSelling";
-import CategoriesGrid from "@/components/Categories";
 import { GetCategoryQuery } from "@/query/querys";
-import Banners from "@/sections/Banners";
+import dynamic from "next/dynamic";
+import CategoriesLoader from "@/components/Loading/CategoriesLoader";
+import ProductSectionLoader from "@/components/Loading/ProductsSectionLoader";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default async function Home() {
-  const Products = await client.fetch(ProductsQuery, {}, { cache: "no-store" });
-
-  console.log(Products);
-
+  const Banners = dynamic(() => import("@/sections/Banners"), {
+    ssr: true,
+    loading: () => (
+      <Skeleton className="h-[350px] md:h-[500px] animate-pulse" />
+    ),
+  });
+  const Categories = dynamic(() => import("@/sections/Categories"), {
+    ssr: true,
+    loading: () => <CategoriesLoader />,
+  });
+  const SectionWrapper = dynamic(() => import("@/components/SectionWrapper"), {
+    ssr: true,
+    loading: () => <ProductSectionLoader />,
+  });
   return (
     <>
-      <div className="container mx-auto">
+      <div className="container mx-auto py-8">
         <Banners />
         <div className="max-w-[2000px] mx-auto">
-          <CategoriesGrid query={GetCategoryQuery} />
+          <Categories query={GetCategoryQuery} />
         </div>
         <div className="container mx-auto">
-          <div className="my-4">
-            <Featured products={Products} />
-          </div>
-          <div className="mt-8">
-            <BestSelling products={Products} />
-          </div>
+          <SectionWrapper />
           {/* <TestmonialSection products={Products} /> */}
         </div>
       </div>

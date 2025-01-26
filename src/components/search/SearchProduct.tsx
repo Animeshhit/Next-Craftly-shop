@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import ImageLoader from "../ImageLoader";
+import ImageLoader from "../../utills/ImageLoader";
 import { IndianRupee, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 

@@ -14,7 +14,7 @@ export const ProductsQuery = `*[_type == "products"] {
 
 export const GetCategoryProductsQuery = (
   category: string
-) => `*[_type == "products" && "${category}" in categories[]->title] {
+) => `*[_type == "products" && "${category}" in categories[]->_id] {
   _id,
   name,
   price,

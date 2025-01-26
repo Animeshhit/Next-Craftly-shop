@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Register from "@/components/Register";
+import Register from "@/components/auth/Register";
 
 export const metadata: Metadata = {
   title: "Register",

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SideNavbarHeader from "../client-components/SideNavbarHeader";
+import SideNavbarHeader from "@/components/Navbar/SideNavbarHeader";
 
 export default function SideNavbar() {
   return (
