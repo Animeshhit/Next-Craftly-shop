@@ -60,16 +60,17 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer id="footer" className="bg-gray-300 pt-6">
-      <div className="container mx-auto px-4">
+    <footer id="footer" className="bg-gray-300/75 pt-6">
+      <div className="container mx-auto px-4 overflow-hidden">
+        <div className="absolute w-56 h-56 blur-[100px] -z-10 bg-pink-500"></div>
         <div className="grid lg:place-items-start sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {footerLinks.map((footer, footerIndex) => (
             <ul className="md:mx-auto" key={footerIndex}>
-              <li className="font-bold mb-3">{footer.heading}</li>
+              <li className="font-bold mb-3 font-oswald">{footer.heading}</li>
               {footer.links.map((link, linkIndex) => (
                 <li key={linkIndex}>
                   <Link
-                    className={`text-sm block pb-1 mb-1 w-max ${
+                    className={`text-sm font-inter block pb-1 mb-1 w-max ${
                       link.class || ""
                     }`}
                     href={link.src}
@@ -82,7 +83,7 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      <h3 className="text-center mt-4 text-sm py-1 tracking-tight text-black/85">
+      <h3 className="text-center mt-4 font-inter text-sm py-1 tracking-tight text-black/85">
         ©2025 All rights reserved by <b>JS Group</b>
       </h3>
     </footer>

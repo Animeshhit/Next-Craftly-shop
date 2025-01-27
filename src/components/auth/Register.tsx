@@ -66,18 +66,18 @@ export default function Register() {
   };
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen w-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-md space-y-8">
         <div>
           <GiftIcon className="mx-auto h-12 w-12 text-primary" />
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-foreground">
+          <h2 className="mt-6 text-center font-oswald text-3xl font-bold tracking-tight text-foreground">
             Register for your gifts
           </h2>
-          <p className="mt-2 text-center text-sm text-muted-foreground">
+          <p className="mt-2 text-center font-inter text-sm text-muted-foreground">
             Create your account to start receiving your gifts.
           </p>
         </div>
-        <form className="space-y-6" onSubmit={handleRegister}>
+        <form className="space-y-6 font-inter" onSubmit={handleRegister}>
           <div>
             <Label htmlFor="name">Full Name</Label>
             <Input
@@ -147,7 +147,7 @@ export default function Register() {
             </div>
           </div>
           <div>
-            <Button type="submit" disabled={btn} className="w-full">
+            <Button type="submit" disabled={btn} className="w-full bg-pink-500">
               {btn ? (
                 <span className="flex items-center gap-2">
                   <LoaderCircle className="w-5 h-5 animate-spin" />
@@ -159,7 +159,7 @@ export default function Register() {
             </Button>
             <p className="text-sm flex items-center gap-2 justify-center mt-2">
               Already have an account?{" "}
-              <Link href="/auth/login" className="text-zinc-900 font-semibold">
+              <Link href="/auth/login" className="text-pink-700 font-semibold">
                 Login
               </Link>
             </p>

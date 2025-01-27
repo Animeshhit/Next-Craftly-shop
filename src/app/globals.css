@@ -29,6 +29,10 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --font-inter: "Inter", serif;
+    --font-oswald: "Oswald", serif;
+    --font-display: "Playfair Display", serif;
+    --font-lato: "Lato", serif;
   }
 
   .dark {
@@ -57,9 +61,6 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
@@ -70,16 +71,57 @@
 
 @layer components {
   .container {
-    @apply !px-4;
+    @apply px-4;
   }
+}
+
+.font-oswald {
+  font-family: var(--font-oswald);
+}
+.font-inter {
+  font-family: var(--font-inter);
+}
+.font-display {
+  font-family: var(--font-display);
+}
+.font-lato {
+  font-family: var(--font-lato);
 }
 
 html,
 body {
   height: 100%;
+  margin: 0; /* Ensure no unwanted margin */
+  padding: 0; /* Reset any padding */
   display: flex;
   flex-direction: column;
 }
+
+/* body::after { */
+/* content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  background-color: #e5e5f7;
+  opacity: 0.1;
+  background-image: linear-gradient(#ff1472 1.4px, transparent 1.4px),
+    linear-gradient(90deg, #ff1472 1.4px, transparent 1.4px),
+    linear-gradient(#ff1472 0.7px, transparent 0.7px),
+    linear-gradient(90deg, #ff1472 0.7px, #e5e5f7 0.7px);
+  background-size:
+    35px 35px,
+    35px 35px,
+    7px 7px,
+    7px 7px;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    0 0;
+  z-index: -1; */
+/* } */
 
 #__next {
   flex: 1;
@@ -93,6 +135,7 @@ main {
 
 /* Container for the markdown */
 .markdown_container {
+  font-family: var(--font-inter);
   @apply text-gray-900 leading-relaxed; /* Tailwind classes for font and line height */
 }
 

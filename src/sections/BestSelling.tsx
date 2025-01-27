@@ -4,10 +4,10 @@ import BestSellingSection from "@/components/Home/BestSellingSection";
 const BestSelling = ({ products }: { products: Product[] }) => {
   return (
     <section id="bestselling">
-      <h2 className="font-semibold text-2xl">
+      <h2 className="font-semibold font-display text-2xl">
         <span>Best</span> <span className="animate-pulse">Selling</span>
       </h2>
-      <p className="text-sm mt-1 text-gray-500">People Gave Love ❤️</p>
+      <p className="text-sm mt-1 font-inter text-pink-700">People Gave Love ❤️</p>
       <BestSellingSection products={products} />
     </section>
   );

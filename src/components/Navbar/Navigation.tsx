@@ -18,7 +18,7 @@ const Navigation = () => {
   return (
     <>
       {isAuth == null ? (
-        <Skeleton className="w-[100px] h-8 bg-zinc-600 rounded-full" />
+        <Skeleton className="w-[100px] h-8 bg-zinc-200 rounded-full" />
       ) : isAuth ? (
         <>
           <div className="flex items-center gap-3">
@@ -36,13 +36,13 @@ const Navigation = () => {
         <>
           <Link
             href="/auth/login"
-            className="py-2 px-4 text-sm tracking-tight rounded-lg"
+            className="py-2 px-4 text-sm font-lato tracking-tight rounded-lg"
           >
             Login
           </Link>
           <Link
             href="/auth/register"
-            className="py-2 hidden md:inline-block font-semibold text-sm px-4 bg-zinc-900 hover:text-white text-white/80 tracking-tight rounded-lg"
+            className="py-2 hidden font-inter md:inline-block font-semibold text-sm px-4 bg-zinc-900 hover:text-white text-white/80 tracking-tight rounded-lg"
           >
             Create an account
           </Link>

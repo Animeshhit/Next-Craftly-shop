@@ -83,12 +83,12 @@ export default function WhatsApp({ data }: { data: Product }) {
     <div className="flex h-screen w-full items-center justify-center bg-background">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Share Your Thoughts</CardTitle>
-          <CardDescription>
+          <CardTitle className="font-oswald">Share Your Thoughts</CardTitle>
+          <CardDescription className="font-inter">
             Tell us what is on your mind and how we can help.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 font-inter">
           <div className="grid gap-2">
             <Label htmlFor="purpose">Purpose</Label>
             <Input
@@ -146,7 +146,7 @@ export default function WhatsApp({ data }: { data: Product }) {
             />
           </div>
         </CardContent>
-        <CardFooter className="flex justify-end">
+        <CardFooter className="flex justify-end font-inter">
           <Button onClick={handleSubmit}>Submit</Button>
         </CardFooter>
       </Card>

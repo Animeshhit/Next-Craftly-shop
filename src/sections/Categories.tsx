@@ -16,7 +16,7 @@ export default async function CategoriesGrid({ query }: { query: string }) {
   const categories: Category[] | [] = await client.fetch(
     query,
     {},
-    { cache: "no-store" }
+    { next: { revalidate: 1800 } }
   );
 
   return (
@@ -25,12 +25,12 @@ export default async function CategoriesGrid({ query }: { query: string }) {
         <div className="flex flex-col gap-4">
           {/* Header Section */}
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold tracking-tight">
+            <h2 className="text-2xl font-semibold font-display tracking-tight">
               Categories
             </h2>
             <Link
               href="/categories"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              className="text-sm font-lato text-muted-foreground hover:text-primary transition-colors"
             >
               View all
             </Link>
@@ -40,10 +40,7 @@ export default async function CategoriesGrid({ query }: { query: string }) {
           <Suspense fallback={<LoadingGrid />}>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {categories.map((category) => (
-                <Link
-                  key={category._id}
-                  href={`/categories/${category._id}`}
-                >
+                <Link key={category._id} href={`/categories/${category._id}`}>
                   <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
                     <CardContent className="p-0">
                       <div className="relative aspect-[4/3] overflow-hidden">
@@ -56,7 +53,7 @@ export default async function CategoriesGrid({ query }: { query: string }) {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                         <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <h3 className="text-lg font-semibold text-white mb-1">
+                          <h3 className="text-lg font-semibold font-oswald text-white mb-1">
                             {category.title}
                           </h3>
                         </div>

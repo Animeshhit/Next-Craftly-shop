@@ -10,13 +10,13 @@ async function Categories({ params }: { params: { id: string } }) {
   const targetProducts: Product[] = await client.fetch(
     GetCategoryProductsQuery(params.id),
     {},
-    { cache: "no-store" }
+    { next: { revalidate: 300 } }
   );
 
   return (
     <div className="container mx-auto px-4">
       {/* Section Header */}
-      <h2 className="my-12 md:my-8 text-2xl font-semibold">
+      <h2 className="my-12 font-display md:my-8 text-2xl font-semibold">
         {targetProducts[0].categories[0]}
       </h2>
 
@@ -27,12 +27,12 @@ async function Categories({ params }: { params: { id: string } }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {Array.from({ length: 8 }).map((_, i) => (
                 <div key={i} className="space-y-3">
-                  <Skeleton className="aspect-square w-full rounded-lg" />{" "}
+                  <Skeleton className="aspect-square w-full rounded-lg bg-gray-200" />{" "}
                   {/* Product image */}
                   <div className="space-y-2">
-                    <Skeleton className="h-3 w-20" /> {/* Category */}
-                    <Skeleton className="h-4 w-full" /> {/* Product name */}
-                    <Skeleton className="h-4 w-16" /> {/* Price */}
+                    <Skeleton className="h-3 w-20 bg-gray-200" /> {/* Category */}
+                    <Skeleton className="h-4 w-full bg-gray-200" /> {/* Product name */}
+                    <Skeleton className="h-4 w-16 bg-gray-200" /> {/* Price */}
                   </div>
                 </div>
               ))}

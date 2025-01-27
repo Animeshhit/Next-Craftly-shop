@@ -61,22 +61,23 @@ export default function Component() {
     }
   };
   return (
-    <div className="flex mt-8 flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
+    <div className="flex mt-8 flex-col items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-md w-full space-y-6">
         <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          <h1 className="text-3xl font-bold font-oswald tracking-tight text-foreground">
             Welcome Back
           </h1>
-          <p className="mt-2 text-muted-foreground">
+          <p className="mt-2 font-inter text-muted-foreground">
             Sign in to your account to browse our handcrafted gifts.
           </p>
         </div>
-        <form className="space-y-4" onSubmit={handleLogin}>
+        <form className="space-y-4 font-inter" onSubmit={handleLogin}>
           <div>
             <Label htmlFor="mobile">Mobile Number</Label>
             <Input
               id="mobile"
               type="number"
+              className="bg-white/75"
               placeholder="Enter your mobile number"
               required
               name="phone"
@@ -102,6 +103,7 @@ export default function Component() {
                 placeholder="Enter your password"
                 required
                 name="password"
+                className="bg-white/75"
                 value={dataOfUserToBeLogin.password}
                 onChange={handleChange}
               />
@@ -117,7 +119,7 @@ export default function Component() {
               </Button>
             </div>
           </div>
-          <Button disabled={btn} type="submit" className="w-full">
+          <Button  disabled={btn} type="submit" className="w-full bg-pink-500">
             {btn ? (
               <span className="flex items-center gap-2">
                 <LoaderCircle className="w-5 h-5 animate-spin" />
@@ -129,7 +131,7 @@ export default function Component() {
           </Button>
           <p className="text-sm flex items-center gap-2 justify-center ">
             Do not have an Account?{" "}
-            <Link href="/auth/register" className="text-zinc-900 font-semibold">
+            <Link href="/auth/register" className="text-pink-700 font-semibold">
               Register
             </Link>
           </p>

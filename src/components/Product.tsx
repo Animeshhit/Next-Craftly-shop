@@ -20,13 +20,13 @@ const ProductCard = ({ Text, product }: { Text: string; product: Product }) => {
           />
         </div>
         <div className="product__info mt-1 pt-2 pb-3">
-          <h3 className="uppercase text-xs font-semibold text-gray-400">
+          <h3 className="uppercase text-xs font-semibold text-red-400 font-oswald">
             {product.categories[0]}
           </h3>
-          <h4 className="font-semibold text-balance !leading-2">
+          <h4 className="font-semibold text-balance font-display !leading-2">
             {product.name}
           </h4>
-          <p className="font-bold text-sm flex items-center mt-0.5">
+          <p className="font-bold text-sm flex font-lato items-center mt-0.5">
             <IndianRupee className="w-3 h-3" />
             {/* <img src="/Price.svg" alt="rs" className="w-3 h-3" /> */}
             {Math.round(

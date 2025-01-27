@@ -119,7 +119,7 @@ const SearchBarForNav = () => {
         id="search"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
-        className="text-sm py-2 flex-1 outline-none border-none bg-inherit placeholder:text-zinc-500 tracking-tight"
+        className="text-sm py-2 flex-1 outline-none font-inter border-none bg-inherit placeholder:text-zinc-500 tracking-tight"
         placeholder="Search products..."
         autoComplete="off"
       />

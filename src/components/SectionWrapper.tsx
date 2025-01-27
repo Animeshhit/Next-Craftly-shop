@@ -5,7 +5,11 @@ import Featured from "@/sections/Featured";
 import BestSelling from "@/sections/BestSelling";
 
 async function SectionWrapper() {
-  const Products = await client.fetch(ProductsQuery, {}, { cache: "no-store" });
+  const Products = await client.fetch(
+    ProductsQuery,
+    {},
+    { next: { revalidate: 300 } }
+  );
   return (
     <>
       <div className="my-4">

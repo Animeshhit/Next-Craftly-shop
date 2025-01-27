@@ -4,7 +4,10 @@ import { client } from "@/lib/client";
 import { GetAProductQuery } from "@/query/querys";
 import ImageLoader from "@/utills/ImageLoader";
 import MarkdownRenderer from "@/utills/MarkDownRenderer";
-import ProductLoader from "@/components/Loading/ProductLoading";
+import {
+  ProductDescription,
+  ProductDetails,
+} from "@/components/Loading/ProductLoading";
 import { Badge } from "@/components/ui/badge";
 import { CircleCheck, CircleOff, IndianRupee, Phone } from "lucide-react";
 import { Product } from "@/types/ProductType";
@@ -13,6 +16,7 @@ import {
   CarouselItem,
   CarouselContent,
 } from "@/components/ui/carousel";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Define props for ProductView
 interface ProductViewProps {
@@ -32,7 +36,7 @@ const ProductPrice: React.FC<{ price: number; discount: number }> = ({
   );
 
   return (
-    <div className="flex items-center gap-4 mt-2">
+    <div className="flex font-lato items-center gap-4 mt-2">
       <p className="text-2xl font-bold">
         <IndianRupee className="inline-block" />
         {discountedPrice}
@@ -54,7 +58,7 @@ const AvailableColors: React.FC<{
   colors: { name: string; color: string }[];
 }> = ({ colors }) => (
   <div className="color-options mt-6">
-    <h2 className="text-sm font-semibold text-zinc-700">Available Colors</h2>
+    <h2 className="text-sm font-bold text-zinc-700 font-inter">Available Colors</h2>
     <div className="flex items-center gap-2 mt-2">
       {colors.map((color, index) => (
         <div
@@ -73,14 +77,14 @@ const AvailableSizes: React.FC<{ sizes: { name: string; size: string }[] }> = ({
   sizes,
 }) => (
   <div className="size-options mt-4">
-    <h2 className="text-sm font-semibold text-zinc-700">Available Sizes</h2>
+    <h2 className="text-sm font-bold text-zinc-700 font-inter">Available Sizes</h2>
     <div className="flex items-center gap-2 mt-2">
       {sizes.map((size, index) => (
         <div
           key={index}
           className="border flex items-center justify-center border-black rounded-md w-6 h-6"
         >
-          <span className="text-xs">{size.size}</span>
+          <span className="text-xs font-inter">{size.size}</span>
         </div>
       ))}
     </div>
@@ -92,7 +96,7 @@ const CustomizableBadge: React.FC<{ isCustomizeable: boolean }> = ({
 }) => (
   <Badge
     variant="outline"
-    className={`py-2 my-8 gap-2 ${isCustomizeable ? "bg-green-500 text-white" : "bg-red-500"}`}
+    className={`py-2 mt-8 gap-2 font-inter ${isCustomizeable ? "bg-green-500 text-white" : "bg-red-500"}`}
   >
     {isCustomizeable ? (
       <>
@@ -129,8 +133,15 @@ const ProductView: React.FC<ProductViewProps> = async ({ params }) => {
   }
 
   return (
-    <Suspense fallback={<ProductLoader />}>
-      <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-12 px-4 md:px-6">
+    <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto py-12 px-4 md:px-6">
+      {/* for image carousel */}
+      <Suspense
+        fallback={
+          <div className="relative">
+            <Skeleton className="aspect-square w-full rounded-lg" />
+          </div>
+        }
+      >
         <div className="grid gap-4">
           {product.productImage && (
             <Carousel className="rounded-lg overflow-hidden">
@@ -159,21 +170,23 @@ const ProductView: React.FC<ProductViewProps> = async ({ params }) => {
             </Carousel>
           )}
         </div>
+      </Suspense>
+      <Suspense fallback={<ProductDetails />}>
         <div className="grid">
           <div>
-            <h1 className="text-3xl font-bold">{product.name}</h1>
+            <h1 className="text-3xl font-bold font-display">{product.name}</h1>
             <ProductPrice
               price={Number(product.price)}
               discount={Number(product.discount)}
             />
             <Link
               href={`/product/buyon/${params.id}/whatsapp`}
-              className="flex mt-6 items-center justify-center bg-zinc-900 text-white py-2 tracking-tight rounded-md hover:bg-zinc-700 hover:text-white/75 transition gap-2"
+              className="flex mt-6 items-center justify-center bg-zinc-900 text-white py-2 tracking-tight rounded-md hover:bg-zinc-700 font-inter hover:text-white/75 transition gap-2"
             >
               <Phone className="w-5 h-5" />
               Get on WhatsApp
             </Link>
-            <p className="mt-6 text-foreground">{product.description}</p>
+            <p className="mt-6 text-foreground font-inter">{product.description}</p>
             <div className="product__types mt-6">
               {product.colors && product.colors.length > 0 && (
                 <AvailableColors colors={product.colors} />
@@ -183,16 +196,18 @@ const ProductView: React.FC<ProductViewProps> = async ({ params }) => {
               )}
               <CustomizableBadge isCustomizeable={product.isCustomizeable} />
               <div className="mt-6">
-                <h2 className="text-sm font-semibold text-zinc-700">
+                <h2 className="text-sm font-inter font-bold text-zinc-700">
                   Product Description
                 </h2>
-                <MarkdownRenderer markdownContent={product.fullDescription} />
+                <Suspense fallback={<ProductDescription />}>
+                  <MarkdownRenderer markdownContent={product.fullDescription} />
+                </Suspense>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </Suspense>
+      </Suspense>
+    </div>
   );
 };
 

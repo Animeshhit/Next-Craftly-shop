@@ -7,7 +7,7 @@ const Banners = async () => {
   let req: BannerType[] | [] = await client.fetch(
     BannersQuery,
     {},
-    { cache: "no-store" }
+    { next: { revalidate: 3600 } }
   );
   return <SwiperBanner banners={req} />;
 };

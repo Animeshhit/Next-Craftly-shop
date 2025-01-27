@@ -8,7 +8,7 @@ export default async function Home() {
   const Banners = dynamic(() => import("@/sections/Banners"), {
     ssr: true,
     loading: () => (
-      <Skeleton className="h-[350px] md:h-[500px] animate-pulse" />
+      <Skeleton className="h-[350px] md:h-[500px] bg-gray-200 animate-pulse" />
     ),
   });
   const Categories = dynamic(() => import("@/sections/Categories"), {
