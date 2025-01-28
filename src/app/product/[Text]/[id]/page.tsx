@@ -58,7 +58,9 @@ const AvailableColors: React.FC<{
   colors: { name: string; color: string }[];
 }> = ({ colors }) => (
   <div className="color-options mt-6">
-    <h2 className="text-sm font-bold text-zinc-700 font-inter">Available Colors</h2>
+    <h2 className="text-sm font-bold text-zinc-700 font-inter">
+      Available Colors
+    </h2>
     <div className="flex items-center gap-2 mt-2">
       {colors.map((color, index) => (
         <div
@@ -77,7 +79,9 @@ const AvailableSizes: React.FC<{ sizes: { name: string; size: string }[] }> = ({
   sizes,
 }) => (
   <div className="size-options mt-4">
-    <h2 className="text-sm font-bold text-zinc-700 font-inter">Available Sizes</h2>
+    <h2 className="text-sm font-bold text-zinc-700 font-inter">
+      Available Sizes
+    </h2>
     <div className="flex items-center gap-2 mt-2">
       {sizes.map((size, index) => (
         <div
@@ -117,7 +121,7 @@ const ProductView: React.FC<ProductViewProps> = async ({ params }) => {
   const product: Product | null = await client.fetch(
     GetAProductQuery(params.id),
     {},
-    { cache: "no-store" }
+    { next: { revalidate: 300 } }
   );
 
   if (!product) {
@@ -186,7 +190,9 @@ const ProductView: React.FC<ProductViewProps> = async ({ params }) => {
               <Phone className="w-5 h-5" />
               Get on WhatsApp
             </Link>
-            <p className="mt-6 text-foreground font-inter">{product.description}</p>
+            <p className="mt-6 text-foreground font-inter">
+              {product.description}
+            </p>
             <div className="product__types mt-6">
               {product.colors && product.colors.length > 0 && (
                 <AvailableColors colors={product.colors} />
