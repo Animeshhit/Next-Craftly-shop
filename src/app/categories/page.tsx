@@ -9,7 +9,10 @@ function page() {
   });
   return (
     <>
-      <Categories query={GetAllCategoryQuery} />
+      <div className="container mx-auto px-4">
+        {" "}
+        <Categories query={GetAllCategoryQuery} />
+      </div>
     </>
   );
 }
