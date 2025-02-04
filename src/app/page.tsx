@@ -21,7 +21,7 @@ export default async function Home() {
   });
   return (
     <>
-      <div className="container mx-auto py-8">
+      <div className="container mx-auto py-8 px-4">
         <Banners />
         <div className="max-w-[2000px] mx-auto">
           <Categories query={GetCategoryQuery} />

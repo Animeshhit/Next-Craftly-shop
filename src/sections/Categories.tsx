@@ -21,7 +21,7 @@ export default async function CategoriesGrid({ query }: { query: string }) {
 
   return (
     <section className="w-full py-8">
-      <div className="container px-4 md:px-6">
+      <div>
         <div className="flex flex-col gap-4">
           {/* Header Section */}
           <div className="flex items-center justify-between">
