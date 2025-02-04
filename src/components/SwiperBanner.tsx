@@ -26,7 +26,7 @@ export default function SwiperBanner({
                     href={banner.bannerLink}
                     className="block w-full h-full"
                   >
-                    <div className="relative h-[350px] md:h-[500px] w-full overflow-hidden">
+                    <div className="relative h-[200px] md:h-[500px] w-full overflow-hidden">
                       <div className="w-full h-full block">
                         <ImageLoader
                           src={banner.bannerImage}

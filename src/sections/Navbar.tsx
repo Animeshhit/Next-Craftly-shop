@@ -1,5 +1,4 @@
 import { Search } from "lucide-react";
-import SearchBarForNav from "../components/Navbar/SearchBarForNav";
 import Link from "next/link";
 import Navigation from "../components/Navbar/Navigation";
 import dynamic from "next/dynamic";
@@ -16,7 +15,7 @@ const Navbar = async () => {
       <header className="backdrop-blur-lg border-b bg-white/75 sticky top-0 inset-x-0 z-10">
         <NavBanner />
         <div className="py-1 overflow-hidden relative">
-          <div className="w-[400px] h-[200px] bg-pink-500 absolute -z-10 rounded-full blur-[100px]"></div>
+          {/* <div className="w-[400px] h-[200px] bg-pink-500 absolute -z-10 rounded-full blur-[100px]"></div> */}
           <div className="container mx-auto">
             <div className="flex items-center justify-between">
               <Link href="/" className="flex items-center justify-center">
@@ -28,14 +27,12 @@ const Navbar = async () => {
                   THE CRAFTLY SHOP
                 </span>
               </Link>
-              <div className="hidden md:block">
-                <SearchBarForNav />
-              </div>
+              <div className="hidden md:block"></div>
 
               <div className="flex items-center gap-1">
-                <Link href="/" className="md:hidden">
+                {/* <Link href="/" className="md:hidden">
                   <Search className="w-5 h-5" />
-                </Link>
+                </Link> */}
                 <Navigation />
               </div>
             </div>

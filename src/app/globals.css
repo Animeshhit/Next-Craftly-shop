@@ -97,6 +97,14 @@ body {
   flex-direction: column;
 }
 
+body {
+  background-image: url("/pattern.svg");
+  background-color: rgba(255,255,255,0.7); /* Semi-transparent black */
+  background-blend-mode: overlay; /* Blend mode to mix color and image */
+  background-size: cover;
+  background-position: center;
+}
+
 /* body::after { */
 /* content: "";
   position: fixed;
