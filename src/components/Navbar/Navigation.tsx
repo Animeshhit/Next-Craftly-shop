@@ -14,7 +14,7 @@ const Navigation = () => {
     if (isAuth == null) {
       getAuthState();
     }
-  }, []);
+  }, [isAuth]);
   return (
     <>
       {isAuth == null ? (

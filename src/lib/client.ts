@@ -6,4 +6,5 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
+  useCdn: true,
 });

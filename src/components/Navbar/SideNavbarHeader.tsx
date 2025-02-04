@@ -11,7 +11,7 @@ const SideNavbarHeader = () => {
     if (isAuth == null) {
       getAuthState();
     }
-  }, []);
+  }, [isAuth]);
   return (
     <>
       <div className="flex items-center space-x-4">

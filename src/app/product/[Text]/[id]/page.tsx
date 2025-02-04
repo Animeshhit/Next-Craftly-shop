@@ -9,7 +9,13 @@ import {
   ProductDetails,
 } from "@/components/Loading/ProductLoading";
 import { Badge } from "@/components/ui/badge";
-import { CircleCheck, CircleOff, IndianRupee, Phone } from "lucide-react";
+import {
+  CircleCheck,
+  CircleOff,
+  IndianRupee,
+  PackageX,
+  Phone,
+} from "lucide-react";
 import { Product } from "@/types/ProductType";
 import {
   Carousel,
@@ -17,6 +23,14 @@ import {
   CarouselContent,
 } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 // Define props for ProductView
 interface ProductViewProps {
@@ -126,12 +140,30 @@ const ProductView: React.FC<ProductViewProps> = async ({ params }) => {
 
   if (!product) {
     return (
-      <div className="max-w-2xl mx-auto py-12 px-4 md:px-6">
-        <h2 className="text-2xl font-bold text-center">Product Not Found</h2>
-        <p className="text-center text-muted-foreground mt-4">
-          The product you are looking for might have been removed or is
-          temporarily unavailable.
-        </p>
+      <div className="flex items-center justify-center mb-56 pt-8">
+        <Card className="w-full max-w-md mx-auto">
+          <CardHeader className="text-center">
+            <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-red-100 flex items-center justify-center">
+              <PackageX className="w-10 h-10 text-red-600" />
+            </div>
+            <CardTitle className="text-2xl font-inter font-bold text-gray-800">
+              Product Not Found
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-center font-inter text-gray-600">
+              We are sorry, but the product you are looking for is not available
+              or do not exist.
+            </p>
+          </CardContent>
+          <CardFooter className="flex justify-center">
+            <Button asChild>
+              <Link href="/" className="font-lato">
+                Return to Home
+              </Link>
+            </Button>
+          </CardFooter>
+        </Card>
       </div>
     );
   }
