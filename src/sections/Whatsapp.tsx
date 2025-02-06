@@ -146,7 +146,9 @@ export default function WhatsApp({ data }: { data: Product }) {
           </div>
         </CardContent>
         <CardFooter className="flex justify-end font-inter">
-          <Button onClick={handleSubmit}>Submit</Button>
+          <Button className="w-full" onClick={handleSubmit}>
+            Submit
+          </Button>
         </CardFooter>
       </div>
     </div>
