@@ -27,7 +27,7 @@ interface FormData {
   purpose: string;
   date: Date | null;
   something: string;
-  cupon: string ;
+  cupon: string;
 }
 
 export default function WhatsApp({ data }: { data: Product }) {
@@ -35,7 +35,7 @@ export default function WhatsApp({ data }: { data: Product }) {
     purpose: "",
     date: null,
     something: "",
-    cupon:"",
+    cupon: "",
   });
 
   const handleChange = (
@@ -55,7 +55,7 @@ export default function WhatsApp({ data }: { data: Product }) {
   };
 
   const handleSubmit = () => {
-    const { purpose, date, something , cupon } = formData;
+    const { purpose, date, something, cupon } = formData;
 
     if (!purpose || !date || !something) {
       alert("All fields are required. Please fill in all the details.");
@@ -81,7 +81,7 @@ export default function WhatsApp({ data }: { data: Product }) {
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-background">
-      <Card className="w-full max-w-md">
+      <div className="w-full lg:border-2 lg:shadow-lg lg:rounded-lg max-w-md">
         <CardHeader>
           <CardTitle className="font-oswald">Share Your Thoughts</CardTitle>
           <CardDescription className="font-inter">
@@ -142,14 +142,13 @@ export default function WhatsApp({ data }: { data: Product }) {
               placeholder="Do You have any Cupon Code?"
               value={formData.cupon}
               onChange={handleChange}
-            
             />
           </div>
         </CardContent>
         <CardFooter className="flex justify-end font-inter">
           <Button onClick={handleSubmit}>Submit</Button>
         </CardFooter>
-      </Card>
+      </div>
     </div>
   );
 }
