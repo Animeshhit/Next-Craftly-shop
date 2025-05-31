@@ -87,7 +87,7 @@ const Footer = () => {
         ©2025 All rights reserved by <b>The Craftly Shop</b>
       </h3>
         <h3 className="text-center mt-4 font-inter text-sm py-1 tracking-tight text-black/85">
-        A brand of JS Group
+        A brand of JS Group by Snehasish Haldar
       </h3>
     </footer>
   );
